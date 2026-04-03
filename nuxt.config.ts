@@ -1,15 +1,22 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
-  devtools: { enabled: true },
+    compatibilityDate: '2025-07-15',
+    devtools: { enabled: true },
 
-  app: {
-    head: {
-      link: [
-        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }
-      ]
-    }
-  },
+    app: {
+        head: {
+            link: [
+                { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+            ],
+        },
+    },
 
-  modules: ['@nuxt/eslint']
+    css: ['~/assets/main.scss'],
+
+    modules: ['@nuxt/eslint', '@nuxtjs/google-fonts'],
+    googleFonts: {
+        families: {
+            Huninn: true,
+        },
+    },
 })
