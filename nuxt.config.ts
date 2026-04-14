@@ -13,7 +13,7 @@ export default defineNuxtConfig({
 
     css: ['~/assets/main.scss'],
 
-    modules: ['@nuxt/eslint', '@nuxtjs/google-fonts'],
+    modules: ['@nuxt/eslint', '@nuxtjs/google-fonts', '@nuxtjs/supabase'],
     googleFonts: {
         families: {
             Huninn: true,
