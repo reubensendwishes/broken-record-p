@@ -1,5 +1,5 @@
 <template>
-    <span>
+    <div style="display: inline-block">
         <svg
             v-if="withText"
             width="130"
@@ -80,7 +80,7 @@
                 fill="#FB8071"
             />
         </svg>
-    </span>
+    </div>
 </template>
 
 <script setup lang="ts">
