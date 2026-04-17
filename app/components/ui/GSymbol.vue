@@ -2,9 +2,6 @@
     <span class="material-symbols-rounded" :style="{ fontSize }">
         <slot />
     </span>
-    <span class="material-symbols-rounded" :style="{ fontSize }"
-        >play_arrow</span
-    >
 </template>
 
 <script setup lang="ts">
