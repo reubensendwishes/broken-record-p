@@ -111,3 +111,11 @@ button:disabled {
         }
     }
 }
+
+.d-flex-row {
+    display: flex;
+}
+.d-flex-column {
+    display: flex;
+    flex-direction: column;
+}
