@@ -18,6 +18,7 @@
 
 <style scoped>
     .material-symbols-rounded {
+        font-family: 'Material Symbols Rounded';
         font-variation-settings:
             'FILL' v-bind(fill),
             'opsz' v-bind(opsz);

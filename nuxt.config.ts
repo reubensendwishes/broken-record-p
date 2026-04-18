@@ -13,10 +13,47 @@ export default defineNuxtConfig({
 
     css: ['~/assets/main.scss'],
 
-    modules: ['@nuxt/eslint', '@nuxtjs/google-fonts', '@nuxtjs/supabase'],
-    googleFonts: {
-        families: {
-            Huninn: true,
-        },
+    modules: ['@nuxt/eslint', '@nuxtjs/supabase', '@nuxt/fonts'],
+    fonts: {
+        families: [
+            {
+                name: 'Chiron GoRound TC Variable',
+                provider: 'fontsource',
+            },
+            {
+                name: 'Material Symbols Rounded',
+                provider: 'googleicons',
+                providerOptions: {
+                    googleicons: {
+                        experimental: {
+                            glyphs: [
+                                'add',
+                                'arrow_back',
+                                'arrow_left',
+                                'arrow_right',
+                                'close',
+                                'content_copy',
+                                'dark_mode',
+                                'delete',
+                                'drag_pan',
+                                'edit',
+                                'keyboard_arrow_down',
+                                'keyboard_arrow_right',
+                                'light_mode',
+                                'menu',
+                                'play_arrow',
+                                'repeat',
+                                'skip_next',
+                                'skip_previous',
+                                'volume_up',
+                            ],
+                        },
+                    },
+                },
+            },
+        ],
+    },
+    supabase: {
+        redirect: false,
     },
 })
