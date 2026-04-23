@@ -2,14 +2,14 @@
     <div class="float-label-field text-primary">
         <input
             :id="fieldData.id"
-            v-model="model"
             class="float-input bg-primary-subtle text-primary"
             :type="fieldData.type"
             :maxlength="fieldData.maxLength"
-            v-on="validationEvents()"
+            @input="handleInput"
+            @[blurEvent]="emit('blur')"
         />
         <label
-            :class="model && 'floating'"
+            :class="formData && 'floating'"
             class="float-label"
             :for="fieldData.id"
             >{{ fieldData.label }}
@@ -23,34 +23,25 @@
     // types
     type Props = {
         fieldData: FieldData
-        validateOn?: string[]
+        listenToBlur?: boolean
+        formData: string
     }
     type Emits = {
-        validate: [type: string]
+        blur: []
+        input: [value: string]
     }
 
     // props
-    const { fieldData, validateOn = undefined } = defineProps<Props>()
+    const { fieldData, listenToBlur = false, formData } = defineProps<Props>()
 
     // Emits
     const emit = defineEmits<Emits>()
 
-    // models
-    const model = defineModel<string>({ default: '' })
-
-    const handlerEvent = (event: Event) => {
-        emit('validate', event.type)
+    const handleInput = (event: Event) => {
+        const target = event.target as HTMLInputElement
+        emit('input', target.value ?? '')
     }
-    const validationEvents = () => {
-        if (validateOn) {
-            const obj: Record<string, (event: Event) => void> = {}
-            validateOn.forEach((eventType) => {
-                obj[eventType] = handlerEvent
-            })
-            return obj
-        }
-        return {}
-    }
+    const blurEvent = computed(() => (listenToBlur ? 'blur' : ''))
 </script>
 
 <style scoped>
