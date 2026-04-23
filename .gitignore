@@ -24,3 +24,6 @@ logs
 !.env.example
 
 Note.md
+
+# VSCode
+.vscode/settings.json
