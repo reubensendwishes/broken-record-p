@@ -2,10 +2,10 @@
     <div class="float-label-field text-primary">
         <input
             :id="fieldData.id"
+            v-model="inputContent"
             class="float-input bg-primary-subtle text-primary"
             :type="fieldData.type"
             :maxlength="fieldData.maxLength"
-            @input="handleInput"
             @[blurEvent]="emit('blur')"
         />
         <label
@@ -37,10 +37,14 @@
     // Emits
     const emit = defineEmits<Emits>()
 
-    const handleInput = (event: Event) => {
-        const target = event.target as HTMLInputElement
-        emit('input', target.value ?? '')
-    }
+    const inputContent = computed({
+        get() {
+            return formData
+        },
+        set(newValue) {
+            emit('input', newValue)
+        },
+    })
     const blurEvent = computed(() => (listenToBlur ? 'blur' : ''))
 </script>
 
