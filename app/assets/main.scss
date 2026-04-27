@@ -102,20 +102,21 @@ a.bg-primary.disabled {
         .bg-default {
             background-color: var(--color-#{$name});
         }
-    } @else if string.slice($name, -8) == 'emphasis' {
+    } @else {
+        .text-#{$name} {
+            color: var(--color-#{$name});
+        }
+        .bg-#{$name} {
+            background-color: var(--color-#{$name});
+        }
+    }
+    @if string.slice($name, -8) == 'emphasis' {
         button.text-#{string.slice($name, 1, -10)}:hover:not(:disabled),
         a.text-#{string.slice($name, 1, -10)}:hover:not(.disabled) {
             color: var(--color-#{$name});
         }
         button.bg-#{string.slice($name, 1, -10)}:hover:not(:disabled),
         a.bg-#{string.slice($name, 1, -10)}:hover:not(.disabled) {
-            background-color: var(--color-#{$name});
-        }
-    } @else {
-        .text-#{$name} {
-            color: var(--color-#{$name});
-        }
-        .bg-#{$name} {
             background-color: var(--color-#{$name});
         }
     }
