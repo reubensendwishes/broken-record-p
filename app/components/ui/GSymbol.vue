@@ -1,7 +1,7 @@
 <template>
-    <span class="material-symbols-rounded" :style="{ fontSize }">
+    <div class="material-symbols-rounded" :style="{ fontSize }">
         <slot />
-    </span>
+    </div>
 </template>
 
 <script setup lang="ts">
