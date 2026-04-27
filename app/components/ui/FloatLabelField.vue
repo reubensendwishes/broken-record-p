@@ -55,8 +55,6 @@
     }
     .float-input {
         width: 100%;
-        outline: none;
-        border: none;
         height: 50px;
         border-radius: 10px;
         padding: 14px 0 0 10px;
