@@ -65,6 +65,17 @@ select {
     font: inherit;
 }
 
+input {
+    background-color: inherit;
+    color: inherit;
+    outline: none;
+    border: none;
+}
+
+input::-webkit-search-cancel-button {
+    display: none;
+}
+
 ul,
 ol {
     list-style: none;
