@@ -22,8 +22,8 @@ $dark: (
 @mixin base-color($colors) {
     @each $name, $color in $colors {
         --color-#{$name}: #{$color};
-        --color-#{$name}-rgb: #{color.channel($color, 'red')
-            color.channel($color, 'green')
+        --color-#{$name}-rgb:
+            #{color.channel($color, 'red'), color.channel($color, 'green'),
             color.channel($color, 'blue')};
     }
 }
