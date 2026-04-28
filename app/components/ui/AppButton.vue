@@ -1,5 +1,5 @@
 <template>
-    <button :type="type" @[event]="emit('trigger')">
+    <button :type="type" @click="emit('click')">
         <slot />
     </button>
 </template>
@@ -13,10 +13,9 @@
         roundedLeft?: `${number}px`
         roundedRight?: `${number}px`
         width?: 'fit-content' | '100%'
-        event?: Event
     }
     type Emits = {
-        trigger: []
+        click: []
     }
 
     // props
@@ -27,7 +26,6 @@
         roundedLeft = '0px',
         roundedRight = '0px',
         width = 'fit-content',
-        event = undefined,
     } = defineProps<Props>()
 
     const emit = defineEmits<Emits>()
