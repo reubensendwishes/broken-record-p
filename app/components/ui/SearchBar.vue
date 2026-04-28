@@ -13,6 +13,7 @@
             @keydown.enter="emit('keydown-enter', searchQuery)"
         />
         <ui-app-button
+            v-if="searchQuery"
             class="text-primary cancel-button"
             @click="searchQuery = ''"
         >
