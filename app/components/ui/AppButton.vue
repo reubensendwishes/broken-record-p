@@ -1,5 +1,5 @@
 <template>
-    <button :type="type" @click="emit('click')">
+    <button class="app-button" :type="type" @click="emit('click')">
         <slot />
     </button>
 </template>
@@ -32,7 +32,7 @@
 </script>
 
 <style scoped>
-    button {
+    .app-button {
         padding: v-bind(paddingY) v-bind(paddingX);
         border-radius: v-bind(roundedLeft) v-bind(roundedRight)
             v-bind(roundedLeft);
