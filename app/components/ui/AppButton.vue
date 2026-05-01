@@ -34,8 +34,7 @@
 <style scoped>
     .app-button {
         padding: v-bind(paddingY) v-bind(paddingX);
-        border-radius: v-bind(roundedLeft) v-bind(roundedRight)
-            v-bind(roundedLeft);
+        border-radius: v-bind(roundedLeft) v-bind(roundedRight);
         width: v-bind(width);
     }
 </style>
