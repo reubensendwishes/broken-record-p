@@ -2,7 +2,7 @@
     <div
         class="search-bar text-primary-emphasis bg-primary-subtle pill-border d-flex-row"
     >
-        <ui-g-symbol class="search-icon" font-size="30px">search</ui-g-symbol>
+        <UiGSymbol class="search-icon" font-size="30px">search</UiGSymbol>
         <input
             :id="id"
             v-model.trim="searchQuery"
@@ -12,13 +12,13 @@
             :placeholder="placeholder"
             @keydown.enter="emit('keydown-enter', searchQuery)"
         />
-        <ui-app-button
+        <UiAppButton
             v-if="searchQuery"
             class="text-primary cancel-button"
             @click="searchQuery = ''"
         >
-            <ui-g-symbol font-size="30px">close</ui-g-symbol>
-        </ui-app-button>
+            <UiGSymbol font-size="30px">close</UiGSymbol>
+        </UiAppButton>
     </div>
 </template>
 
