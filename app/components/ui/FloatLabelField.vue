@@ -48,7 +48,7 @@
     const blurEvent = computed(() => (listenToBlur ? 'blur' : ''))
 </script>
 
-<style scoped>
+<style>
     .float-label-field {
         position: relative;
         margin-bottom: 6px;
