@@ -10,6 +10,7 @@
             class="search-input bg-primary-subtle"
             type="search"
             :placeholder="placeholder"
+            :aria-label="label"
             @keydown.enter="emit('keydown-enter', searchQuery)"
         />
         <UiAppButton
@@ -26,6 +27,7 @@
     // types
     type Props = {
         id: string
+        label?: string
         placeholder?: string
     }
     type Emits = {
@@ -33,7 +35,7 @@
     }
 
     // props
-    const { id, placeholder = '搜尋' } = defineProps<Props>()
+    const { id, label = '搜尋欄', placeholder = '搜尋' } = defineProps<Props>()
 
     // emits
     const emit = defineEmits<Emits>()
