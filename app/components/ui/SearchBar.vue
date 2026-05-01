@@ -42,7 +42,7 @@
     const searchQuery = ref('')
 </script>
 
-<style scoped>
+<style>
     .search-bar {
         border: none;
         overflow: hidden;
@@ -64,7 +64,7 @@
     .search-input::placeholder {
         color: var(--color-primary);
     }
-    .cancel-button {
+    .search-bar > .cancel-button {
         margin-right: 4px;
     }
 </style>

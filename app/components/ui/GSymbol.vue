@@ -16,7 +16,7 @@
     const { fontSize = '24px', fill = 0, opsz = 24 } = defineProps<Props>()
 </script>
 
-<style scoped>
+<style>
     .material-symbols-rounded {
         font-family: 'Material Symbols Rounded';
         font-variation-settings:
