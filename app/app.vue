@@ -1,8 +1,6 @@
 <template>
     <NuxtRouteAnnouncer />
-    <NuxtLayout>
-        <NuxtPage />
-    </NuxtLayout>
+    <NuxtPage />
 </template>
 <script lang="ts" setup>
     useHead({

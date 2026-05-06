@@ -17,7 +17,6 @@
 
     // page meta
     definePageMeta({
-        layout: 'auth',
         middleware: 'guest',
     })
 
