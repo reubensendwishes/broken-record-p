@@ -1,59 +1,68 @@
 <template>
-    <main class="auth-panel">
-        <div class="auth-form-wrapper">
-            <div class="auth-header">
-                <UiAppLogo with-text />
-            </div>
-            <form
-                class="auth-form d-flex-column"
-                novalidate
-                @submit.prevent="emit('submit')"
-            >
-                <div
-                    v-for="fieldData in fieldDatas"
-                    :key="fieldData.id"
-                    class="auth-field"
-                >
-                    <UiFloatLabelField
-                        :listen-to-blur="withValidation"
-                        :field-data="fieldData"
-                        :form-data="formDatas[fieldData.id]"
-                        @input="
-                            (value) => {
-                                emit('input', fieldData.id, value)
-                            }
-                        "
-                        @blur="emit('validate', fieldData.id)"
-                    />
-                    <p v-if="fieldErrors?.[fieldData.id]" class="field-error">
-                        {{ fieldErrors?.[fieldData.id] }}
-                    </p>
-                    <p
-                        v-if="fieldData.helper"
-                        class="field-helper text-primary-subtle"
-                    >
-                        {{ fieldData.helper }}
-                    </p>
+    <div class="auth-wrapper d-flex-row">
+        <main class="auth-panel">
+            <div class="auth-form-wrapper">
+                <div class="auth-header">
+                    <UiAppLogo with-text />
                 </div>
-                <div v-if="formError" class="form-error">{{ formError }}</div>
-
-                <UiAppButton
-                    rounded-left="10px"
-                    rounded-right="10px"
-                    padding-x="0px"
-                    width="100%"
-                    class="text-inverse bg-primary"
-                    type="submit"
-                    :disabled="isSubmitDisabled"
+                <form
+                    class="auth-form d-flex-column"
+                    novalidate
+                    @submit.prevent="emit('submit')"
                 >
-                    <slot name="button" />
-                </UiAppButton>
-            </form>
-        </div>
-        <div class="auth-footer font-20">
-            <p class="auth-prompt text-primary-subtle d-flex-row"><slot /></p>
-        </div>
-    </main>
+                    <div
+                        v-for="fieldData in fieldDatas"
+                        :key="fieldData.id"
+                        class="auth-field"
+                    >
+                        <UiFloatLabelField
+                            :listen-to-blur="withValidation"
+                            :field-data="fieldData"
+                            :form-data="formDatas[fieldData.id]"
+                            @input="
+                                (value) => {
+                                    emit('input', fieldData.id, value)
+                                }
+                            "
+                            @blur="emit('validate', fieldData.id)"
+                        />
+                        <p
+                            v-if="fieldErrors?.[fieldData.id]"
+                            class="field-error"
+                        >
+                            {{ fieldErrors?.[fieldData.id] }}
+                        </p>
+                        <p
+                            v-if="fieldData.helper"
+                            class="field-helper text-primary-subtle"
+                        >
+                            {{ fieldData.helper }}
+                        </p>
+                    </div>
+                    <div v-if="formError" class="form-error">
+                        {{ formError }}
+                    </div>
+
+                    <UiAppButton
+                        rounded-left="10px"
+                        rounded-right="10px"
+                        padding-x="0px"
+                        width="100%"
+                        class="text-inverse bg-primary"
+                        type="submit"
+                        :disabled="isSubmitDisabled"
+                    >
+                        <slot name="button" />
+                    </UiAppButton>
+                </form>
+            </div>
+            <div class="auth-footer font-20">
+                <p class="auth-prompt text-primary-subtle d-flex-row">
+                    <slot />
+                </p>
+            </div>
+        </main>
+    </div>
 </template>
 
 <script setup lang="ts" generic="T extends string">
@@ -108,6 +117,12 @@
 </script>
 
 <style>
+    .auth-wrapper {
+        width: 100%;
+        min-height: 100dvh;
+        justify-content: center;
+        align-items: center;
+    }
     .auth-panel {
         width: min(400px, 100%);
     }
