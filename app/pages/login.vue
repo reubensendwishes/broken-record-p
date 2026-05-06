@@ -1,0 +1,86 @@
+<template>
+    <auth-panel
+        :field-datas="fieldDatas"
+        :form-datas="formDatas"
+        :form-error="formError"
+        @input="handleInput"
+        @submit="handleSubmit"
+    >
+        <template #button>登入</template>
+        <span>沒有帳號嗎?</span>
+        <UiAppLink to="/signup" class="text-primary">註冊</UiAppLink>
+    </auth-panel>
+</template>
+
+<script setup lang="ts">
+    import type { FieldDatas } from '~/types'
+
+    // page meta
+    definePageMeta({
+        layout: 'auth',
+        middleware: 'guest',
+    })
+
+    // types
+    type LoginFieldId = 'login-email' | 'login-password'
+
+    // supabase
+    const supabase = useSupabaseClient()
+    const user = useSupabaseUser()
+
+    const fieldDatas: FieldDatas<LoginFieldId> = [
+        {
+            id: 'login-email',
+            type: 'email',
+            label: '電子郵件地址',
+        },
+        {
+            id: 'login-password',
+            type: 'password',
+            label: '密碼',
+            maxLength: 12,
+        },
+    ]
+    const formDatas = ref<{ [K in LoginFieldId]: string }>(
+        Object.fromEntries(fieldDatas.map((data) => [data.id, ''])) as {
+            [K in LoginFieldId]: string
+        },
+    )
+    const formError = ref('')
+    const handleInput = (id: LoginFieldId, value: string) => {
+        formDatas.value[id] = value
+    }
+
+    const login = async () => {
+        const { error } = await supabase.auth.signInWithPassword({
+            email: formDatas.value['login-email'],
+            password: formDatas.value['login-password'],
+        })
+        if (error) {
+            formError.value = '登入失敗'
+        }
+    }
+
+    const isSubmitting = ref(false)
+    const handleSubmit = async () => {
+        if (isSubmitting.value || user.value) return
+        isSubmitting.value = true
+        try {
+            await login()
+        } catch {
+            formError.value = '登入失敗'
+        } finally {
+            isSubmitting.value = false
+        }
+    }
+
+    watch(
+        user,
+        () => {
+            if (user.value) {
+                navigateTo('/')
+            }
+        },
+        { immediate: true },
+    )
+</script>
