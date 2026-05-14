@@ -1,5 +1,5 @@
 <template>
-    <div class="material-symbols-rounded" :style="{ fontSize }">
+    <div class="material-symbols-rounded" :style="{ fontSize }" translate="no">
         <slot />
     </div>
 </template>
