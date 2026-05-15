@@ -108,7 +108,6 @@
                 )
                 if (!res.available) return '使用者名稱已被使用'
             } catch (error) {
-                console.log(error)
                 if ((error as Error).name === 'AbortError') return ''
                 return (
                     (error as FetchError).data?.message ?? '檢查失敗,請稍後再試'
@@ -139,8 +138,11 @@
 
     const handleInput = (id: SignupFieldId, value: string) => {
         formDatas.value[id] = value.trim()
-        usernameCheckCtrl?.abort()
+        if (id === 'signup-username') {
+            usernameCheckCtrl?.abort()
+        }
         fieldErrors.value[id] = ''
+        formError.value = ''
     }
     const handleValidate = async (id: SignupFieldId) => {
         if (fieldErrors.value[id]) return
@@ -156,7 +158,7 @@
             email: formDatas.value['signup-email'],
             password: formDatas.value['signup-password'],
             options: {
-                emailRedirectTo: 'http://localhost:3000/confirm',
+                emailRedirectTo: `${window.location.origin}/confirm`,
                 data: {
                     username: formDatas.value['signup-username'],
                     display_name: formDatas.value['signup-display-name'],
@@ -181,7 +183,6 @@
             isSubmitting.value = false
         }
     }
-
     watch(
         user,
         () => {
