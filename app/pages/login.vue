@@ -48,6 +48,7 @@
     const formError = ref('')
     const handleInput = (id: LoginFieldId, value: string) => {
         formDatas.value[id] = value
+        formError.value = ''
     }
 
     const login = async () => {
