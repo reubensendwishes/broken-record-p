@@ -1,5 +1,5 @@
 <template>
-    <div style="display: inline-block">
+    <div class="app-logo">
         <svg
             v-if="withText"
             width="130"
@@ -92,3 +92,10 @@
     // props
     const { withText = false } = defineProps<Props>()
 </script>
+
+<style>
+    .app-logo {
+        line-height: 0;
+        display: inline-block;
+    }
+</style>
