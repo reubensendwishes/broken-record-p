@@ -13,7 +13,7 @@
     }
 
     // props
-    const { fontSize = '24px', fill = 0, opsz = 24 } = defineProps<Props>()
+    const { fontSize = '30px', fill = 0, opsz = 24 } = defineProps<Props>()
 </script>
 
 <style>
