@@ -1,24 +1,24 @@
 <template>
     <div
-        class="search-bar text-primary-emphasis bg-primary-subtle pill-border d-flex-row"
+        ref="search-bar"
+        class="search-bar d-flex-row border-primary pill-border text-primary-subtle"
     >
-        <UiGSymbol class="search-icon" font-size="30px">search</UiGSymbol>
+        <UiGSymbol class="search-icon">search</UiGSymbol>
         <input
             :id="id"
             v-model.trim="searchQuery"
             enterkeyhint="search"
-            class="search-input bg-primary-subtle"
+            class="search-input text-primary"
             type="search"
             :placeholder="placeholder"
             :aria-label="label"
-            @keydown.enter="emit('keydown-enter', searchQuery)"
         />
         <UiAppButton
             v-if="searchQuery"
             class="text-primary cancel-button"
             @click="searchQuery = ''"
         >
-            <UiGSymbol font-size="30px">close</UiGSymbol>
+            <UiGSymbol>close</UiGSymbol>
         </UiAppButton>
     </div>
 </template>
@@ -30,24 +30,31 @@
         label?: string
         placeholder?: string
     }
-    type Emits = {
-        'keydown-enter': [searchQuery: string]
-    }
 
     // props
-    const { id, label = '搜尋欄', placeholder = '搜尋' } = defineProps<Props>()
+    const {
+        id,
+        label = '搜尋欄',
+        placeholder = '搜尋...',
+    } = defineProps<Props>()
 
-    // emits
-    const emit = defineEmits<Emits>()
-    const searchQuery = ref('')
+    // models
+    const searchQuery = defineModel<string>()
+
+    const searchBarRef = useTemplateRef('search-bar')
+
+    // exposes
+    defineExpose({
+        searchBarRef,
+    })
 </script>
 
 <style>
     .search-bar {
-        border: none;
         overflow: hidden;
         position: relative;
-        align-items: center;
+        height: 46px;
+        width: 100%;
     }
     .search-icon {
         position: absolute;
@@ -58,11 +65,10 @@
     }
     .search-input {
         flex-grow: 1;
-        height: 50px;
-        padding: 10px 10px 10px 50px;
+        padding: 0 10px 0 50px;
     }
     .search-input::placeholder {
-        color: var(--color-primary);
+        color: var(--color-primary-subtle);
     }
     .search-bar > .cancel-button {
         margin-right: 4px;
