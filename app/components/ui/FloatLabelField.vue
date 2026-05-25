@@ -1,42 +1,38 @@
 <template>
     <div class="float-label-field text-primary bg-primary-subtle d-flex-row">
         <input
-            :id="fieldData.id"
+            :id="field.id"
             v-model="inputContent"
             class="float-input text-primary"
             :type="fieldType"
-            :maxlength="fieldData.maxLength"
+            :maxlength="field.maxLength"
             @[blurEvent]="emit('blur')"
         />
         <label
-            :class="formData && 'floating'"
+            :class="fieldValue && 'floating'"
             class="float-label"
-            :for="fieldData.id"
-            >{{ fieldData.label }}
+            :for="field.id"
+            >{{ field.label }}
         </label>
         <UiAppButton
-            v-if="fieldData.type === 'password'"
+            v-if="field.type === 'password'"
             class="toggle-visibility-btn text-primary"
             @click="isPasswordVisible = !isPasswordVisible"
         >
-            <UiGSymbol v-show="isPasswordVisible" font-size="30px"
-                >visibility</UiGSymbol
-            >
-            <UiGSymbol v-show="!isPasswordVisible" font-size="30px"
-                >visibility_off</UiGSymbol
-            >
+            <UiGSymbol v-show="isPasswordVisible">visibility</UiGSymbol>
+            <UiGSymbol v-show="!isPasswordVisible">visibility_off</UiGSymbol>
         </UiAppButton>
     </div>
 </template>
 
 <script setup lang="ts">
-    import type { FieldData } from '~/types'
+    import type { Field } from '~/types'
 
     // types
     type Props = {
-        fieldData: FieldData
+        field: Field
         listenToBlur?: boolean
-        formData: string
+        fieldValue: string
     }
     type Emits = {
         blur: []
@@ -44,14 +40,14 @@
     }
 
     // props
-    const { fieldData, listenToBlur = false, formData } = defineProps<Props>()
+    const { field, listenToBlur = false, fieldValue } = defineProps<Props>()
 
     // Emits
     const emit = defineEmits<Emits>()
 
     const inputContent = computed({
         get() {
-            return formData
+            return fieldValue
         },
         set(newValue) {
             emit('input', newValue)
@@ -62,10 +58,10 @@
     const isPasswordVisible = ref(false)
 
     const fieldType = computed(() => {
-        if (fieldData.type === 'password' && isPasswordVisible.value) {
+        if (field.type === 'password' && isPasswordVisible.value) {
             return 'text'
         }
-        return fieldData.type
+        return field.type
     })
 </script>
 

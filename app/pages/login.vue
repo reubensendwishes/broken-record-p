@@ -1,7 +1,7 @@
 <template>
     <auth-panel
-        :field-datas="fieldDatas"
-        :form-datas="formDatas"
+        :fields="fields"
+        :field-values="fieldValues"
         :form-error="formError"
         @input="handleInput"
         @submit="handleSubmit"
@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-    import type { FieldDatas } from '~/types'
+    import type { Fields } from '~/types'
 
     // page meta
     definePageMeta({
@@ -27,7 +27,7 @@
     const supabase = useSupabaseClient()
     const user = useSupabaseUser()
 
-    const fieldDatas: FieldDatas<LoginFieldId> = [
+    const fields: Fields<LoginFieldId> = [
         {
             id: 'login-email',
             type: 'email',
@@ -40,21 +40,21 @@
             maxLength: 12,
         },
     ]
-    const formDatas = ref<{ [K in LoginFieldId]: string }>(
-        Object.fromEntries(fieldDatas.map((data) => [data.id, ''])) as {
+    const fieldValues = ref<{ [K in LoginFieldId]: string }>(
+        Object.fromEntries(fields.map((data) => [data.id, ''])) as {
             [K in LoginFieldId]: string
         },
     )
     const formError = ref('')
     const handleInput = (id: LoginFieldId, value: string) => {
-        formDatas.value[id] = value
+        fieldValues.value[id] = value
         formError.value = ''
     }
 
     const login = async () => {
         const { error } = await supabase.auth.signInWithPassword({
-            email: formDatas.value['login-email'],
-            password: formDatas.value['login-password'],
+            email: fieldValues.value['login-email'],
+            password: fieldValues.value['login-password'],
         })
         if (error) {
             formError.value = '登入失敗'
