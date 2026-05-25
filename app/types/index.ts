@@ -1,4 +1,4 @@
-export type FieldData<T = string> = {
+export type Field<T = string> = {
     id: T
     type: string
     label: string
@@ -6,7 +6,7 @@ export type FieldData<T = string> = {
     maxLength?: number
 }
 
-export type FieldDatas<T = string> = [FieldData<T>, ...FieldData<T>[]]
+export type Fields<T = string> = [Field<T>, ...Field<T>[]]
 
 export type Validator = (value: string) => string | Promise<string>
 

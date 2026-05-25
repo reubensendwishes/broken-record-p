@@ -1,8 +1,8 @@
 <template>
     <authPanel
         :field-errors="fieldErrors"
-        :field-datas="fieldDatas"
-        :form-datas="formDatas"
+        :fields="fields"
+        :field-values="fieldValues"
         :form-error="formError"
         :with-validation="true"
         @input="handleInput"
@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
     import type { FetchError } from 'ofetch'
-    import type { FieldDatas, Validators } from '~/types'
+    import type { Fields, Validators } from '~/types'
 
     // page meta
     definePageMeta({
@@ -35,7 +35,7 @@
     const supabase = useSupabaseClient()
     const user = useSupabaseUser()
 
-    const fieldDatas: FieldDatas<SignupFieldId> = [
+    const fields: Fields<SignupFieldId> = [
         {
             id: 'signup-email',
             type: 'email',
@@ -63,8 +63,8 @@
             maxLength: 120,
         },
     ]
-    const formDatas = ref<{ [K in SignupFieldId]: string }>(
-        Object.fromEntries(fieldDatas.map((data) => [data.id, ''])) as {
+    const fieldValues = ref<{ [K in SignupFieldId]: string }>(
+        Object.fromEntries(fields.map((data) => [data.id, ''])) as {
             [K in SignupFieldId]: string
         },
     )
@@ -129,7 +129,7 @@
         },
     }
     const fieldErrors = ref<{ [K in SignupFieldId]: string }>(
-        Object.fromEntries(fieldDatas.map((data) => [data.id, ''])) as {
+        Object.fromEntries(fields.map((data) => [data.id, ''])) as {
             [K in SignupFieldId]: string
         },
     )
@@ -137,7 +137,7 @@
     const formError = ref('')
 
     const handleInput = (id: SignupFieldId, value: string) => {
-        formDatas.value[id] = value.trim()
+        fieldValues.value[id] = value.trim()
         if (id === 'signup-username') {
             usernameCheckCtrl?.abort()
         }
@@ -146,22 +146,22 @@
     }
     const handleValidate = async (id: SignupFieldId) => {
         if (fieldErrors.value[id]) return
-        fieldErrors.value[id] = await validators[id](formDatas.value[id])
+        fieldErrors.value[id] = await validators[id](fieldValues.value[id])
     }
     const signup = async () => {
-        for (const id of Object.keys(formDatas.value) as SignupFieldId[]) {
-            fieldErrors.value[id] = await validators[id](formDatas.value[id])
+        for (const id of Object.keys(fieldValues.value) as SignupFieldId[]) {
+            fieldErrors.value[id] = await validators[id](fieldValues.value[id])
             if (fieldErrors.value[id]) return
         }
 
         const { error } = await supabase.auth.signUp({
-            email: formDatas.value['signup-email'],
-            password: formDatas.value['signup-password'],
+            email: fieldValues.value['signup-email'],
+            password: fieldValues.value['signup-password'],
             options: {
                 emailRedirectTo: `${window.location.origin}/confirm`,
                 data: {
-                    username: formDatas.value['signup-username'],
-                    display_name: formDatas.value['signup-display-name'],
+                    username: fieldValues.value['signup-username'],
+                    display_name: fieldValues.value['signup-display-name'],
                 },
             },
         })

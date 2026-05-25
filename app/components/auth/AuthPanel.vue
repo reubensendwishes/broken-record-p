@@ -11,32 +11,29 @@
                     @submit.prevent="emit('submit')"
                 >
                     <div
-                        v-for="fieldData in fieldDatas"
-                        :key="fieldData.id"
+                        v-for="field in fields"
+                        :key="field.id"
                         class="auth-field"
                     >
                         <UiFloatLabelField
                             :listen-to-blur="withValidation"
-                            :field-data="fieldData"
-                            :form-data="formDatas[fieldData.id]"
+                            :field="field"
+                            :field-value="fieldValues[field.id]"
                             @input="
                                 (value) => {
-                                    emit('input', fieldData.id, value)
+                                    emit('input', field.id, value)
                                 }
                             "
-                            @blur="emit('validate', fieldData.id)"
+                            @blur="emit('validate', field.id)"
                         />
-                        <p
-                            v-if="fieldErrors?.[fieldData.id]"
-                            class="field-error"
-                        >
-                            {{ fieldErrors?.[fieldData.id] }}
+                        <p v-if="fieldErrors?.[field.id]" class="field-error">
+                            {{ fieldErrors?.[field.id] }}
                         </p>
                         <p
-                            v-if="fieldData.helper"
+                            v-if="field.helper"
                             class="field-helper text-primary-subtle"
                         >
-                            {{ fieldData.helper }}
+                            {{ field.helper }}
                         </p>
                     </div>
                     <div v-if="formError" class="form-error">
@@ -66,14 +63,14 @@
 </template>
 
 <script setup lang="ts" generic="T extends string">
-    import type { FieldDatas } from '~/types'
+    import type { Fields } from '~/types'
 
     // types
     type Props = {
         fieldErrors?: { [K in T]: string }
         formError?: string
-        fieldDatas: FieldDatas<T>
-        formDatas: { [K in T]: string }
+        fields: Fields<T>
+        fieldValues: { [K in T]: string }
         withValidation?: boolean
     }
     type Emit = {
@@ -86,8 +83,8 @@
     const {
         fieldErrors = undefined,
         formError = undefined,
-        fieldDatas,
-        formDatas,
+        fields,
+        fieldValues,
         withValidation = false,
     } = defineProps<Props>()
 
@@ -97,9 +94,9 @@
     const isSubmitting = ref(false)
     const isSubmitDisabled = computed(() => {
         if (isSubmitting.value) return true
-        if (formDatas) {
-            for (const key in formDatas) {
-                if (formDatas[key] === '') {
+        if (fieldValues) {
+            for (const key in fieldValues) {
+                if (fieldValues[key] === '') {
                     return true
                 }
             }
