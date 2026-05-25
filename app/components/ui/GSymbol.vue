@@ -1,5 +1,5 @@
 <template>
-    <div class="material-symbols-rounded" :style="{ fontSize }" translate="no">
+    <div class="material-symbols-rounded" translate="no">
         <slot />
     </div>
 </template>
@@ -18,7 +18,9 @@
 
 <style>
     .material-symbols-rounded {
+        width: fit-content;
         font-family: 'Material Symbols Rounded';
+        font-size: v-bind(fontSize);
         font-variation-settings:
             'FILL' v-bind(fill),
             'opsz' v-bind(opsz);
