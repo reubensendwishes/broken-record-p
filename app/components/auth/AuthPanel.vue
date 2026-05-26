@@ -63,13 +63,13 @@
 </template>
 
 <script setup lang="ts" generic="T extends string">
-    import type { Fields } from '~/types'
+    import type { AuthFields } from '~/types'
 
     // types
     type Props = {
         fieldErrors?: { [K in T]: string }
         formError?: string
-        fields: Fields<T>
+        fields: AuthFields<T>
         fieldValues: { [K in T]: string }
         withValidation?: boolean
     }

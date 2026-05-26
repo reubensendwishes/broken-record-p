@@ -1,4 +1,4 @@
-export type Field<T = string> = {
+export type AuthField<T = string> = {
     id: T
     type: string
     label: string
@@ -6,7 +6,7 @@ export type Field<T = string> = {
     maxLength?: number
 }
 
-export type Fields<T = string> = [Field<T>, ...Field<T>[]]
+export type AuthFields<T = string> = [AuthField<T>, ...AuthField<T>[]]
 
 export type Validator = (value: string) => string | Promise<string>
 
@@ -17,10 +17,3 @@ export type FabItem<T = string> = {
 }
 
 export type FabItems<T = string> = [FabItem<T>, ...FabItem<T>[]]
-
-export type DraggableItem<T = Record<string, unknown>> = {
-    id: string
-    title: string
-    sort: number
-    children: DraggableItem<T>[]
-} & T
