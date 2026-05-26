@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
     import type { FetchError } from 'ofetch'
-    import type { Fields, Validators } from '~/types'
+    import type { AuthFields, Validators } from '~/types'
 
     // page meta
     definePageMeta({
@@ -35,7 +35,7 @@
     const supabase = useSupabaseClient()
     const user = useSupabaseUser()
 
-    const fields: Fields<SignupFieldId> = [
+    const fields: AuthFields<SignupFieldId> = [
         {
             id: 'signup-email',
             type: 'email',

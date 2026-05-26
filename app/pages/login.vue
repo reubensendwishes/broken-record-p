@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-    import type { Fields } from '~/types'
+    import type { AuthFields } from '~/types'
 
     // page meta
     definePageMeta({
@@ -27,7 +27,7 @@
     const supabase = useSupabaseClient()
     const user = useSupabaseUser()
 
-    const fields: Fields<LoginFieldId> = [
+    const fields: AuthFields<LoginFieldId> = [
         {
             id: 'login-email',
             type: 'email',
