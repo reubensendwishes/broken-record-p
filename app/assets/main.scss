@@ -101,11 +101,15 @@ button:disabled {
     cursor: default;
 }
 button.text-primary:disabled,
-a.text-primary.disabled {
+a.text-primary.disabled,
+button.text-secondary:disabled,
+a.text-secondary.disabled {
     color: var(--color-muted);
 }
 button.bg-primary:disabled,
-a.bg-primary.disabled {
+a.bg-primary.disabled,
+button.bg-secondary:disabled,
+a.bg-secondary.disabled {
     background-color: var(--color-muted);
 }
 @each $name, $color in $colors {
@@ -123,6 +127,12 @@ a.bg-primary.disabled {
         .bg-#{$name} {
             background-color: var(--color-#{$name});
         }
+        .border-#{$name} {
+            border: solid 2px var(--color-#{$name});
+        }
+        .border-#{$name}.dashed {
+            border: dashed 2px var(--color-#{$name});
+        }
     }
     @if string.slice($name, -8) == 'emphasis' {
         button.text-#{string.slice($name, 1, -10)}:hover:not(:disabled),
@@ -132,6 +142,14 @@ a.bg-primary.disabled {
         button.bg-#{string.slice($name, 1, -10)}:hover:not(:disabled),
         a.bg-#{string.slice($name, 1, -10)}:hover:not(.disabled) {
             background-color: var(--color-#{$name});
+        }
+        button.border-#{string.slice($name, 1, -10)}:hover:not(:disabled) {
+            border: solid 2px var(--color-#{$name});
+        }
+        button.border-#{string.slice($name, 1, -10)}.dashed:hover:not(
+                :disabled
+            ) {
+            border: dashed 2px var(--color-#{$name});
         }
     }
 }
