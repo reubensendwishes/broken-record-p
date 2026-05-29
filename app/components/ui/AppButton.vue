@@ -36,7 +36,8 @@
 <style>
     .app-button {
         padding: v-bind(paddingY) v-bind(paddingX);
-        border-radius: v-bind(roundedLeft) v-bind(roundedRight);
+        border-radius: v-bind(roundedLeft) v-bind(roundedRight)
+            v-bind(roundedRight) v-bind(roundedLeft);
         width: v-bind(width);
         height: v-bind(height);
     }
