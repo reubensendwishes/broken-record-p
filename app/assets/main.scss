@@ -180,3 +180,9 @@ a.bg-secondary.disabled {
     -moz-user-select: none;
     user-select: none;
 }
+
+@media (max-width: 767.98px) {
+    .hide-sm {
+        display: none;
+    }
+}
