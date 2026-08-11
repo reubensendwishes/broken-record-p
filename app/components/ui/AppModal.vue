@@ -19,7 +19,7 @@
                 <div class="modal-body">
                     <slot />
                 </div>
-                <div class="modal-actions d-flex-row">
+                <div v-if="hasActions" class="modal-actions d-flex-row">
                     <UiAppButton
                         class="cancel-btn text-primary"
                         @click="emit('close')"
@@ -40,6 +40,7 @@
     type Props = {
         hasBackdrop?: boolean
         zIndex?: number
+        hasActions?: boolean
     }
     type Emits = {
         close: []
@@ -54,7 +55,11 @@
     const emit = defineEmits<Emits>()
 
     // props
-    const { hasBackdrop = false, zIndex = 1000 } = defineProps<Props>()
+    const {
+        hasBackdrop = false,
+        zIndex = 1000,
+        hasActions = true,
+    } = defineProps<Props>()
 
     // slots
     const slots = defineSlots<Slots>()
