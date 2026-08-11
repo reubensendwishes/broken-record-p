@@ -9,6 +9,7 @@
             padding-x="15px"
             padding-y="15px"
             height="60px"
+            :is-disabled="isDisabled"
             @click="emit('click')"
         >
             <slot />
@@ -21,12 +22,17 @@
     type Props = {
         zIndex?: number
         color?: 'primary' | 'secondary'
+        isDisabled?: boolean
     }
     type Emits = {
         click: []
     }
     // props
-    const { zIndex = 700, color = 'primary' } = defineProps<Props>()
+    const {
+        zIndex = 700,
+        color = 'primary',
+        isDisabled = false,
+    } = defineProps<Props>()
 
     // emits
     const emit = defineEmits<Emits>()

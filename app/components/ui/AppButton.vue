@@ -1,5 +1,10 @@
 <template>
-    <button class="app-button" :type="type" @click="emit('click')">
+    <button
+        class="app-button"
+        :type="type"
+        :disabled="isDisabled"
+        @click="emit('click')"
+    >
         <slot />
     </button>
 </template>
@@ -14,6 +19,8 @@
         roundedRight?: `${number}px`
         width?: string
         height?: string
+        textAlign?: 'start' | 'center' | 'end'
+        isDisabled?: boolean
     }
     type Emits = {
         click: []
@@ -28,6 +35,8 @@
         roundedRight = '0px',
         width = 'fit-content',
         height = 'fit-content',
+        textAlign = 'center',
+        isDisabled = false,
     } = defineProps<Props>()
 
     const emit = defineEmits<Emits>()
@@ -40,5 +49,6 @@
             v-bind(roundedRight) v-bind(roundedLeft);
         width: v-bind(width);
         height: v-bind(height);
+        text-align: v-bind(textAlign);
     }
 </style>
