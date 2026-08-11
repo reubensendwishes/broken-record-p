@@ -10,7 +10,7 @@
                 ref="modal-content"
                 v-focus
                 tabindex="-1"
-                class="modal-content bg-default"
+                class="modal-content bg-default d-flex-column"
                 @focusin.stop
             >
                 <div v-if="slots.header" class="modal-header">
@@ -103,6 +103,7 @@
         max-width: 400px;
         border-radius: 20px;
         padding: 20px;
+        max-height: 100dvh;
     }
     .modal-content > *:not(:last-child) {
         margin-bottom: 20px;
