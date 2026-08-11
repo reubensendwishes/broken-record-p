@@ -14,7 +14,7 @@
         paddingY?: `${number}px`
         roundedLeft?: `${number}px`
         roundedRight?: `${number}px`
-        width?: 'fit-content' | '100%'
+        width?: string
     }
 
     // props
@@ -30,6 +30,7 @@
 
 <style>
     .app-link {
+        display: inline-flex;
         padding: v-bind(paddingY) v-bind(paddingX);
         border-radius: v-bind(roundedLeft) v-bind(roundedRight);
         width: v-bind(width);
