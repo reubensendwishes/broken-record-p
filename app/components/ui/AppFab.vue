@@ -43,7 +43,7 @@
     })
 </script>
 
-<style>
+<style scoped>
     .app-fab {
         z-index: v-bind(zIndex);
         position: fixed;

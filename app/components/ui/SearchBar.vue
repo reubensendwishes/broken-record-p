@@ -58,7 +58,7 @@
     })
 </script>
 
-<style>
+<style scoped>
     .search-bar {
         overflow: hidden;
         position: relative;

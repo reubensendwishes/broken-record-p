@@ -88,7 +88,7 @@
     })
 </script>
 
-<style>
+<style scoped>
     .fab-menu {
         z-index: v-bind(zIndex);
         position: fixed;
@@ -107,7 +107,7 @@
         bottom: calc(20px + env(safe-area-inset-bottom));
         pointer-events: auto;
     }
-    .fab-menu .fab-menu-btn.toggle-btn {
+    .fab-menu-btn.toggle-btn {
         transition: transform 0.5s;
         box-shadow: 0 0 16px var(--color-primary);
     }

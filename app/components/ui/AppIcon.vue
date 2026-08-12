@@ -32,7 +32,7 @@
     } = defineProps<Props>()
 </script>
 
-<style>
+<style scoped>
     .app-icon {
         line-height: 0;
         width: v-bind(width);

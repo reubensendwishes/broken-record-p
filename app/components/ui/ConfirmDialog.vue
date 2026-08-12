@@ -18,7 +18,7 @@
     const { answer, confirmDialogState } = useConfirm()
 </script>
 
-<style>
+<style scoped>
     .confirm-dialog .confirm-title {
         text-align: center;
         font-weight: 500;
