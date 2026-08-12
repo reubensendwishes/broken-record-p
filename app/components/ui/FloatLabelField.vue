@@ -1,22 +1,24 @@
 <template>
-    <div class="float-label-field text-primary bg-primary-subtle d-flex-row">
+    <div
+        class="float-label-field text-primary d-flex-row border-primary-subtle"
+    >
         <input
             :id="field.id"
             v-model="inputContent"
-            class="float-input text-primary"
+            class="float-input"
             :type="fieldType"
             :maxlength="field.maxLength"
             @[blurEvent]="emit('blur')"
         />
         <label
             :class="fieldValue && 'floating'"
-            class="float-label"
+            class="float-label text-primary-subtle"
             :for="field.id"
             >{{ field.label }}
         </label>
         <UiAppButton
             v-if="field.type === 'password'"
-            class="toggle-visibility-btn text-primary"
+            class="toggle-visibility-btn text-primary-subtle"
             @click="isPasswordVisible = !isPasswordVisible"
         >
             <UiGSymbol v-show="isPasswordVisible">visibility</UiGSymbol>
@@ -26,11 +28,11 @@
 </template>
 
 <script setup lang="ts">
-    import type { Field } from '~/types'
+    import type { AuthField } from '~/types'
 
     // types
     type Props = {
-        field: Field
+        field: AuthField
         listenToBlur?: boolean
         fieldValue: string
     }
@@ -68,6 +70,7 @@
 <style>
     .float-label-field {
         position: relative;
+        align-items: center;
         margin-bottom: 6px;
         border-radius: 10px;
         height: 50px;
@@ -78,20 +81,17 @@
     }
     .float-input {
         width: 100%;
-        padding: 16px 0 2px 10px;
-    }
-    .float-label-field:focus-within > .float-input {
         padding: 14px 0 0 8px;
     }
     .float-input:-webkit-autofill {
         -webkit-text-fill-color: var(--color-primary);
-        -webkit-box-shadow: 0 0 0 1000px var(--color-primary-subtle) inset;
+        -webkit-box-shadow: 0 0 0 1000px var(--color-background) inset;
     }
     .float-label {
         position: absolute;
         transform-origin: top left;
         top: 50%;
-        left: 10px;
+        left: 8px;
         transform: translateY(-50%);
         transition: transform 0.2s;
         pointer-events: none;
@@ -100,13 +100,7 @@
     .float-label.floating {
         transform: translateY(calc(-50% - 10px)) scale(0.5);
     }
-    .float-label-field:focus-within > .float-label {
-        left: 8px;
-    }
     .float-label-field > .toggle-visibility-btn {
-        margin-right: 2px;
-    }
-    .float-label-field:focus-within > .toggle-visibility-btn {
         margin-right: 0px;
     }
 </style>
