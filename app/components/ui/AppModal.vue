@@ -97,12 +97,27 @@
         position: absolute;
         inset: 50% auto auto 50%;
         transform: translate(-50%, -50%);
-        width: calc(
-            100% - env(safe-area-inset-right) - env(safe-area-inset-left)
-        );
+        width: 100%;
         max-width: 400px;
         border-radius: 20px;
-        padding: 20px;
+        padding: 20px
+            calc(
+                clamp(
+                        0px,
+                        env(safe-area-inset-right) - 50dvw + 200px,
+                        env(safe-area-inset-right)
+                    ) +
+                    20px
+            )
+            20px
+            calc(
+                clamp(
+                        0px,
+                        env(safe-area-inset-left) - 50dvw + 200px,
+                        env(safe-area-inset-left)
+                    ) +
+                    20px
+            );
         max-height: 100dvh;
     }
     .modal-content > *:not(:last-child) {
