@@ -27,7 +27,7 @@
                     >
                         取消
                     </UiAppButton>
-                    <div class="primary-action">
+                    <div v-if="slots['primary-action']" class="primary-action">
                         <slot name="primary-action" />
                     </div>
                 </div>
