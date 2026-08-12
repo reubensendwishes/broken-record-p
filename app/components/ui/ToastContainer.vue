@@ -39,7 +39,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     .toast-container {
         position: fixed;
         width: fit-content;
@@ -82,7 +82,7 @@
     .toast:not(:last-child) {
         margin-bottom: 20px;
     }
-    .toast > .icon-wrapper {
+    .icon-wrapper {
         padding: 6px;
     }
     .toast-message {

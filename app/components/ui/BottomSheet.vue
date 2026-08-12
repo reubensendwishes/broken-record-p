@@ -90,7 +90,7 @@
     })
 </script>
 
-<style>
+<style scoped>
     .bottom-sheet {
         z-index: v-bind(zIndex);
         position: fixed;

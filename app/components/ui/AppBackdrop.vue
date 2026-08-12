@@ -1,7 +1,7 @@
 <template>
     <div class="backdrop" />
 </template>
-<style>
+<style scoped>
     .backdrop {
         width: 100%;
         height: 100%;

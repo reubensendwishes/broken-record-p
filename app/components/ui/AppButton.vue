@@ -42,7 +42,7 @@
     const emit = defineEmits<Emits>()
 </script>
 
-<style>
+<style scoped>
     .app-button {
         padding: v-bind(paddingY) v-bind(paddingX);
         border-radius: v-bind(roundedLeft) v-bind(roundedRight)

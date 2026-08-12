@@ -93,7 +93,7 @@
     const { withText = false } = defineProps<Props>()
 </script>
 
-<style>
+<style scoped>
     .app-logo {
         line-height: 0;
         display: inline-block;

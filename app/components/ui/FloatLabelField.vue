@@ -67,7 +67,7 @@
     })
 </script>
 
-<style>
+<style scoped>
     .float-label-field {
         position: relative;
         align-items: center;
@@ -100,7 +100,7 @@
     .float-label.floating {
         transform: translateY(calc(-50% - 10px)) scale(0.5);
     }
-    .float-label-field > .toggle-visibility-btn {
+    .toggle-visibility-btn {
         margin-right: 0px;
     }
 </style>

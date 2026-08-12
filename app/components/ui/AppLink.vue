@@ -28,7 +28,7 @@
     } = defineProps<Props>()
 </script>
 
-<style>
+<style scoped>
     .app-link {
         display: inline-flex;
         padding: v-bind(paddingY) v-bind(paddingX);
