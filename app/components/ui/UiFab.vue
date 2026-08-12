@@ -1,8 +1,8 @@
 <template>
     <Teleport to="#teleports">
-        <UiAppButton
+        <UiButton
             :class="[`bg-${color}`]"
-            class="app-fab text-inverse"
+            class="fab text-inverse"
             v-bind="$attrs"
             rounded-left="9999px"
             rounded-right="9999px"
@@ -13,7 +13,7 @@
             @click="emit('click')"
         >
             <slot />
-        </UiAppButton>
+        </UiButton>
     </Teleport>
 </template>
 
@@ -44,16 +44,16 @@
 </script>
 
 <style scoped>
-    .app-fab {
+    .fab {
         z-index: v-bind(zIndex);
         position: fixed;
         right: calc(20px + env(safe-area-inset-right));
         bottom: calc(20px + env(safe-area-inset-bottom));
     }
-    .app-fab.bg-primary {
+    .fab.bg-primary {
         box-shadow: 0 0 16px var(--color-primary);
     }
-    .app-fab.bg-secondary {
+    .fab.bg-secondary {
         box-shadow: 0 0 16px var(--color-secondary);
     }
 </style>

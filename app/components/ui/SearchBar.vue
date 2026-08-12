@@ -14,13 +14,13 @@
             :aria-label="label"
             @keydown.esc="emit('close')"
         />
-        <UiAppButton
+        <UiButton
             v-if="searchQuery"
             class="text-primary cancel-button"
             @click="searchQuery = ''"
         >
             <UiGSymbol>close</UiGSymbol>
-        </UiAppButton>
+        </UiButton>
     </div>
 </template>
 
