@@ -103,14 +103,24 @@
         left: 50%;
         transform: translateX(-50%);
         border-radius: 20px 20px 0 0;
-        padding-top: 20px;
-        padding-left: calc(
-            20px + max(env(safe-area-inset-right), env(safe-area-inset-left))
-        );
-        padding-right: calc(
-            20px + max(env(safe-area-inset-right), env(safe-area-inset-left))
-        );
-        padding-bottom: calc(20px + env(safe-area-inset-bottom));
+        padding: 20px
+            calc(
+                clamp(
+                        0px,
+                        env(safe-area-inset-right) - 50dvw + 200px,
+                        env(safe-area-inset-right)
+                    ) +
+                    20px
+            )
+            calc(20px + env(safe-area-inset-bottom))
+            calc(
+                clamp(
+                        0px,
+                        env(safe-area-inset-left) - 50dvw + 200px,
+                        env(safe-area-inset-left)
+                    ) +
+                    20px
+            );
         pointer-events: auto;
         width: min(400px, 100%);
     }
