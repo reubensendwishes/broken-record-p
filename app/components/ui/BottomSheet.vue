@@ -85,7 +85,7 @@
     })
     useHead({
         bodyAttrs: {
-            class: 'no-scroll',
+            class: hasBackdrop ? 'no-scroll' : '',
         },
     })
 </script>
