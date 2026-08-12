@@ -25,11 +25,7 @@
     })
 
     // types
-    type SignupFieldId =
-        | 'signup-email'
-        | 'signup-password'
-        | 'signup-username'
-        | 'signup-display-name'
+    type SignupFieldId = 'signup-email' | 'signup-password' | 'signup-username'
 
     // supabase
     const supabase = useSupabaseClient()
@@ -55,13 +51,6 @@
             helper: '使用者名稱只能包含數字、英文字母，以及_-符號，並且_-不能在結尾或開頭出現。',
             maxLength: 30,
         },
-        {
-            id: 'signup-display-name',
-            type: 'text',
-            label: '暱稱',
-            helper: "僅可使用文字、數字、半形空格及' . -符號。",
-            maxLength: 120,
-        },
     ]
     const fieldValues = ref<{ [K in SignupFieldId]: string }>(
         Object.fromEntries(fields.map((data) => [data.id, ''])) as {
@@ -71,13 +60,13 @@
     let usernameCheckCtrl: AbortController | null = null
 
     const validators: Validators<SignupFieldId> = {
-        'signup-email'(value) {
+        'signup-email'(value: string) {
             if (!value) return '此欄位爲必填'
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value))
                 return 'email格式錯誤'
             return ''
         },
-        'signup-password'(value) {
+        'signup-password'(value: string) {
             if (!value) return '此欄位爲必填'
             if (value.length < 8) return '至少需要8個字元'
             if (value.length > 72) return '不能超過72個字元'
@@ -89,7 +78,7 @@
 
             return ''
         },
-        async 'signup-username'(value) {
+        async 'signup-username'(value: string) {
             if (!value) return '此欄位爲必填'
             if (value.length > 30) return '不能超過30個字元'
             if (!/^[\w-]+$/.test(value)) return '不能使用非規定內的特殊字元'
@@ -114,17 +103,6 @@
                 )
             }
 
-            return ''
-        },
-        'signup-display-name'(value) {
-            if (!value) return '此欄位爲必填'
-            const graphmeLength = Array.from(
-                new Intl.Segmenter().segment(value),
-            ).length
-            if (graphmeLength > 20) return '不能超過20個字元'
-            if (!/^[\p{L}\p{M}\p{N} '.-]+$/u.test(value))
-                return "僅可使用文字、數字、空格及' . -"
-            if (/\p{M}{3,}/u.test(value)) return '含有不支援的特殊字元'
             return ''
         },
     }
@@ -161,7 +139,6 @@
                 emailRedirectTo: `${window.location.origin}/confirm`,
                 data: {
                     username: fieldValues.value['signup-username'],
-                    display_name: fieldValues.value['signup-display-name'],
                 },
             },
         })
