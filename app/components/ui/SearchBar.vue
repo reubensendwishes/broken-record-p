@@ -12,6 +12,7 @@
             type="search"
             :placeholder="placeholder"
             :aria-label="label"
+            @keydown.esc="emit('close')"
         />
         <UiAppButton
             v-if="searchQuery"
@@ -29,6 +30,10 @@
         id: string
         label?: string
         placeholder?: string
+        width?: string
+    }
+    type Emits = {
+        close: []
     }
 
     // props
@@ -36,7 +41,11 @@
         id,
         label = '搜尋欄',
         placeholder = '搜尋...',
+        width = 'fit-content',
     } = defineProps<Props>()
+
+    // emits
+    const emit = defineEmits<Emits>()
 
     // models
     const searchQuery = defineModel<string>()
@@ -54,7 +63,7 @@
         overflow: hidden;
         position: relative;
         height: 46px;
-        width: 100%;
+        width: v-bind(width);
     }
     .search-icon {
         position: absolute;
@@ -65,6 +74,7 @@
     }
     .search-input {
         flex-grow: 1;
+        min-width: 0;
         padding: 0 10px 0 50px;
     }
     .search-input::placeholder {
