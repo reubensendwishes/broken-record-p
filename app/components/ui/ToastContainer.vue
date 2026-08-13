@@ -11,12 +11,12 @@
                         <UiGSymbol>{{ toastIcon(toast.type) }}</UiGSymbol>
                     </div>
                     <p class="toast-message">{{ toast.message }}</p>
-                    <UiAppButton
+                    <UiButton
                         class="text-primary"
                         @click="removeToast(toast.id)"
                     >
                         <UiGSymbol>close</UiGSymbol>
-                    </UiAppButton>
+                    </UiButton>
                 </div>
             </TransitionGroup>
         </div>

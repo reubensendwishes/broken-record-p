@@ -1,5 +1,5 @@
 <template>
-    <NuxtLink class="app-link" :to="to">
+    <NuxtLink class="link" :to="to">
         <slot />
     </NuxtLink>
 </template>
@@ -29,7 +29,7 @@
 </script>
 
 <style scoped>
-    .app-link {
+    .link {
         display: inline-flex;
         padding: v-bind(paddingY) v-bind(paddingX);
         border-radius: v-bind(roundedLeft) v-bind(roundedRight);

@@ -1,7 +1,7 @@
 <template>
     <Teleport to="#teleports">
         <div v-bind="$attrs" class="bottom-sheet" @keydown.esc="emit('close')">
-            <ui-app-backdrop
+            <UiBackdrop
                 v-if="hasBackdrop"
                 class="sheet-backdrop"
                 @click="emit('close')"
@@ -21,12 +21,12 @@
                     <slot />
                 </div>
                 <div v-if="hasActions" class="sheet-actions d-flex-row">
-                    <UiAppButton
+                    <UiButton
                         class="cancel-btn text-primary"
                         @click="emit('close')"
                     >
                         取消
-                    </UiAppButton>
+                    </UiButton>
                     <div v-if="slots['primary-action']" class="primary-action">
                         <slot name="primary-action" />
                     </div>

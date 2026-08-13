@@ -1,7 +1,7 @@
 <template>
     <Teleport to="#teleports">
         <div v-bind="$attrs" class="modal" @keydown.esc="emit('close')">
-            <ui-app-backdrop
+            <UiBackdrop
                 v-if="hasBackdrop"
                 class="modal-backdrop"
                 @click="emit('close')"
@@ -20,12 +20,12 @@
                     <slot />
                 </div>
                 <div v-if="hasActions" class="modal-actions d-flex-row">
-                    <UiAppButton
+                    <UiButton
                         class="cancel-btn text-primary"
                         @click="emit('close')"
                     >
                         取消
-                    </UiAppButton>
+                    </UiButton>
                     <div class="primary-action">
                         <slot name="primary-action" />
                     </div>

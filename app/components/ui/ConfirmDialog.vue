@@ -1,5 +1,5 @@
 <template>
-    <UiAppModal has-backdrop class="confirm-dialog" @close="answer(false)">
+    <UiModal has-backdrop class="confirm-dialog" @close="answer(false)">
         <template #header
             ><h3 class="text-primary-subtle confirm-title">
                 確認視窗
@@ -7,11 +7,9 @@
         >
         <p class="confirm-message">{{ confirmDialogState.message }}</p>
         <template #primary-action>
-            <UiAppButton class="text-primary" @click="answer(true)"
-                >確認</UiAppButton
-            >
+            <UiButton class="text-primary" @click="answer(true)">確認</UiButton>
         </template>
-    </UiAppModal>
+    </UiModal>
 </template>
 
 <script setup lang="ts">

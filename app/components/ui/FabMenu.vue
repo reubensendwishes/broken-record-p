@@ -6,14 +6,14 @@
             class="fab-menu"
             @focusin.stop
         >
-            <UiAppBackdrop
+            <UiBackdrop
                 v-if="isMenuExpanded"
                 class="fab-menu-backdrop"
                 @click="isMenuExpanded = false"
             />
             <ul class="fab-menu-list">
                 <li class="fab-menu-item">
-                    <UiAppButton
+                    <UiButton
                         ref="toggle-btn"
                         padding-x="15px"
                         padding-y="15px"
@@ -23,7 +23,7 @@
                         @click="isMenuExpanded = !isMenuExpanded"
                     >
                         <UiGSymbol>add</UiGSymbol>
-                    </UiAppButton>
+                    </UiButton>
                 </li>
                 <template v-if="isMenuExpanded">
                     <li
@@ -31,7 +31,7 @@
                         :key="item.name"
                         class="fab-menu-item"
                     >
-                        <UiAppButton
+                        <UiButton
                             padding-x="18px"
                             padding-y="18px"
                             rounded-left="9999px"
@@ -39,7 +39,7 @@
                             class="fab-menu-btn text-primary bg-default"
                             @click="emit('click', item.name)"
                         >
-                            {{ item.name }}</UiAppButton
+                            {{ item.name }}</UiButton
                         >
                     </li>
                 </template>

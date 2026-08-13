@@ -3,7 +3,7 @@
         <main class="auth-panel">
             <div class="auth-form-wrapper">
                 <div class="auth-header">
-                    <UiAppLogo with-text />
+                    <AppLogo with-text />
                 </div>
                 <form
                     class="auth-form d-flex-column"
@@ -40,7 +40,7 @@
                         {{ formError }}
                     </div>
 
-                    <UiAppButton
+                    <UiButton
                         rounded-left="10px"
                         rounded-right="10px"
                         padding-x="0px"
@@ -50,7 +50,7 @@
                         :disabled="isSubmitDisabled"
                     >
                         <slot name="button" />
-                    </UiAppButton>
+                    </UiButton>
                 </form>
             </div>
             <div class="auth-footer font-20">

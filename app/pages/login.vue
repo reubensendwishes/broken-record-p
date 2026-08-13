@@ -1,5 +1,5 @@
 <template>
-    <auth-panel
+    <AuthPanel
         :fields="fields"
         :field-values="fieldValues"
         :form-error="formError"
@@ -8,8 +8,8 @@
     >
         <template #button>登入</template>
         <span>沒有帳號嗎?</span>
-        <UiAppLink to="/signup" class="text-primary">註冊</UiAppLink>
-    </auth-panel>
+        <UiLink to="/signup" class="text-primary">註冊</UiLink>
+    </AuthPanel>
 </template>
 
 <script setup lang="ts">

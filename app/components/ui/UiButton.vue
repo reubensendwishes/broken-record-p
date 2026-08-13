@@ -1,6 +1,6 @@
 <template>
     <button
-        class="app-button"
+        class="button"
         :type="type"
         :disabled="isDisabled"
         @click="emit('click')"
@@ -43,7 +43,7 @@
 </script>
 
 <style scoped>
-    .app-button {
+    .button {
         padding: v-bind(paddingY) v-bind(paddingX);
         border-radius: v-bind(roundedLeft) v-bind(roundedRight)
             v-bind(roundedRight) v-bind(roundedLeft);

@@ -16,14 +16,14 @@
             :for="field.id"
             >{{ field.label }}
         </label>
-        <UiAppButton
+        <UiButton
             v-if="field.type === 'password'"
             class="toggle-visibility-btn text-primary-subtle"
             @click="isPasswordVisible = !isPasswordVisible"
         >
             <UiGSymbol v-show="isPasswordVisible">visibility</UiGSymbol>
             <UiGSymbol v-show="!isPasswordVisible">visibility_off</UiGSymbol>
-        </UiAppButton>
+        </UiButton>
     </div>
 </template>
 
