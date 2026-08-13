@@ -143,9 +143,11 @@ a.bg-secondary.disabled {
         a.bg-#{string.slice($name, 1, -10)}:hover:not(.disabled) {
             background-color: var(--color-#{$name});
         }
+        a.border-#{string.slice($name, 1, -10)}:hover:not(:disabled),
         button.border-#{string.slice($name, 1, -10)}:hover:not(:disabled) {
             border: solid 2px var(--color-#{$name});
         }
+        a.border-#{string.slice($name, 1, -10)}.dashed:hover:not(:disabled),
         button.border-#{string.slice($name, 1, -10)}.dashed:hover:not(
                 :disabled
             ) {
