@@ -13,15 +13,20 @@
                 class="modal-content bg-default d-flex-column"
                 @focusin.stop
             >
-                <div v-if="slots.header" class="modal-header">
-                    <slot name="header" />
-                </div>
+                <template v-if="slots.header">
+                    <div class="modal-header">
+                        <slot name="header" />
+                    </div>
+                    <hr :class="`bg-${color}-subtle`" class="divider" />
+                </template>
+
                 <div class="modal-body">
                     <slot />
                 </div>
                 <div v-if="hasActions" class="modal-actions d-flex-row">
                     <UiButton
-                        class="cancel-btn text-primary"
+                        :class="`text-${color}`"
+                        class="cancel-btn"
                         @click="emit('close')"
                     >
                         取消
@@ -38,6 +43,7 @@
 <script setup lang="ts">
     // types
     type Props = {
+        color?: 'primary' | 'secondary'
         hasBackdrop?: boolean
         zIndex?: number
         hasActions?: boolean
@@ -59,6 +65,7 @@
         hasBackdrop = false,
         zIndex = 1000,
         hasActions = true,
+        color = 'primary',
     } = defineProps<Props>()
 
     // slots
@@ -122,6 +129,10 @@
     }
     .modal-content > *:not(:last-child) {
         margin-bottom: 20px;
+    }
+    .divider {
+        border: none;
+        height: 2px;
     }
     .modal-body {
         overflow: auto;

@@ -1,10 +1,11 @@
 <template>
-    <div class="selector">
+    <div :class="`text-${color}`" class="selector">
         <div class="selector-label">{{ selector.label }}</div>
         <div class="selector-body d-flex-row">
             <UiButton
                 :disabled="selector.currentIndex === 0"
-                class="text-primary prev-btn"
+                :class="`text-${color}`"
+                class="prev-btn"
                 @click="handleButtonClick('prev')"
             >
                 <div class="icon-wrapper">
@@ -24,7 +25,8 @@
                 :disabled="
                     selector.currentIndex === selector.options.length - 1
                 "
-                class="text-primary next-btn"
+                :class="`text-${color}`"
+                class="next-btn"
                 @click="handleButtonClick('next')"
             >
                 <div class="icon-wrapper">
@@ -42,6 +44,7 @@
 
     // types
     type Props = {
+        color?: 'primary' | 'secondary'
         selector: Selector
     }
     type Emits = {
@@ -50,7 +53,7 @@
     }
 
     // props
-    const { selector } = defineProps<Props>()
+    const { selector, color = 'primary' } = defineProps<Props>()
 
     // emits
     const emit = defineEmits<Emits>()
