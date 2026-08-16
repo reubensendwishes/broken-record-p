@@ -117,9 +117,9 @@
     const textEditorRef = useTemplateRef('text-editor')
     const textEditorClass = computed(() => {
         if (isEditable) {
-            return [`bg-${color}-subtle`, 'editable']
+            return [`bg-${color}-subtle`]
         }
-        return ''
+        return ['text-truncate']
     })
 
     watch(
@@ -153,15 +153,8 @@
 <style scoped>
     .text-editor {
         padding: 6px;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
         outline: none;
         width: fit-content;
         max-width: 100%;
-    }
-    .text-editor.editable {
-        text-overflow: initial;
-        overflow: auto;
     }
 </style>
