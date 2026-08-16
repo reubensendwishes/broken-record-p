@@ -1,7 +1,13 @@
 <template>
-    <UiModal has-backdrop class="fields-modal" @close="emit('close')">
+    <UiModal
+        :color="color"
+        has-backdrop
+        class="fields-modal"
+        :class="`text-${color}`"
+        @close="emit('close')"
+    >
         <template #header>
-            <h3 class="modal-title text-primary-emphasis">
+            <h3 class="modal-title">
                 {{ title }}
             </h3>
         </template>
@@ -10,6 +16,7 @@
                 <template v-for="(field, index) in fields" :key="field.id">
                     <div
                         v-if="field.type === 'input'"
+                        :class="`text-${color}`"
                         class="modal-field d-flex-column"
                     >
                         <label :for="field.id" class="fields-modal-label">
@@ -33,7 +40,8 @@
                         />
                         <p
                             v-if="field.helper"
-                            class="field-helper text-primary-subtle"
+                            :class="`text-muted`"
+                            class="field-helper"
                         >
                             {{ field.helper }}
                         </p>
@@ -43,6 +51,7 @@
                     </div>
                     <UiSelector
                         v-if="field.type === 'selector'"
+                        :color="color"
                         :selector="field"
                         class="fields-modal-field"
                         @increment:index="emit('increment:index', field.id)"
@@ -50,14 +59,15 @@
                     />
                     <hr
                         v-if="index !== fields.length - 1"
-                        class="field-divider bg-primary-subtle"
+                        :class="`bg-${color}-subtle`"
+                        class="field-divider"
                     />
                 </template>
             </div>
         </template>
         <template #primary-action>
             <UiButton
-                class="text-primary"
+                :class="`text-${color}`"
                 :is-disabled="isDisabled"
                 @click="!isDisabled && emit('primary-action')"
             >
@@ -73,6 +83,7 @@
     // types
     type Props = {
         title: string
+        color?: 'primary' | 'secondary'
         fields: FieldsModalField[]
         primaryActionName: string
         changeCheck?: boolean
@@ -93,6 +104,7 @@
     const {
         title,
         fields,
+        color = 'primary',
         primaryActionName,
         changeCheck = false,
         isSubmitting = false,
@@ -134,6 +146,7 @@
     .modal-title {
         font-size: 24px;
         text-align: center;
+        font-weight: 600;
     }
     .modal-fields {
         gap: 20px;
@@ -159,11 +172,14 @@
         -moz-appearance: textfield;
         appearance: textfield;
     }
-    .modal-input::placeholder {
+    .fields-modal.text-primary .modal-input::placeholder {
         color: var(--color-primary-subtle);
+    }
+    .fields-modal.text-secondary .modal-input::placeholder {
+        color: var(--color-secondary-subtle);
     }
     .field-divider {
         border: none;
-        height: 2px;
+        height: 1px;
     }
 </style>
