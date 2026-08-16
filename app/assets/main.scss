@@ -188,3 +188,9 @@ a.bg-secondary.disabled {
         display: none;
     }
 }
+
+.text-truncate {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

@@ -16,7 +16,10 @@
             </UiButton>
             <div class="option-wrapper">
                 <Transition :name="transitionName">
-                    <div :key="selector.currentIndex" class="option">
+                    <div
+                        :key="selector.currentIndex"
+                        class="option text-truncate"
+                    >
                         {{ selector.options[selector.currentIndex]?.name }}
                     </div>
                 </Transition>
@@ -96,9 +99,6 @@
         text-align: center;
         grid-column: 1;
         grid-row: 1;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
     }
     .prev-enter-from,
     .next-leave-to {
