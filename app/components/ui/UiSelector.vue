@@ -96,6 +96,7 @@
         overflow: hidden;
     }
     .option {
+        line-height: 1.25;
         text-align: center;
         grid-column: 1;
         grid-row: 1;
