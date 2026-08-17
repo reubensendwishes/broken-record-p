@@ -17,7 +17,7 @@
                     <div class="modal-header">
                         <slot name="header" />
                     </div>
-                    <hr :class="`bg-${color}-subtle`" class="divider" />
+                    <div :class="`bg-${color}-subtle`" class="divider" />
                 </template>
 
                 <div class="modal-body">
@@ -131,7 +131,6 @@
         margin-bottom: 20px;
     }
     .divider {
-        border: none;
         height: 2px;
     }
     .modal-body {
