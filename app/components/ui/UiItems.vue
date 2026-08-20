@@ -1,23 +1,19 @@
 <template>
-    <ul class="items d-flex-column">
-        <template v-for="(item, index) in items" :key="item.id">
-            <li
-                :class="[
-                    sortableChosenId === item.id && 'sortable-chosen',
-                    selectedItemId === item.id && 'border-secondary',
-                    selectedItemId === item.id && 'selected',
-                ]"
-                class="item text-secondary no-select"
-                :data-item-id="item.id"
-                @pointerdown="releaseCapture"
-            >
-                <slot :item="item" :index="index" />
-            </li>
-            <div
-                v-if="hasDivider && index !== items.length - 1"
-                class="divider bg-secondary-subtle"
-            />
-        </template>
+    <ul :class="hasDivider && 'has-divider'" class="items d-flex-column">
+        <li
+            v-for="(item, index) in items"
+            :key="item.id"
+            :class="[
+                sortableChosenId === item.id && 'sortable-chosen',
+                selectedItemId === item.id && 'border-secondary',
+                selectedItemId === item.id && 'selected',
+            ]"
+            class="item text-secondary no-select"
+            :data-item-id="item.id"
+            @pointerdown="releaseCapture"
+        >
+            <slot :item="item" :index="index" />
+        </li>
     </ul>
 </template>
 
@@ -52,6 +48,10 @@
         if (!target) return
         target.releasePointerCapture(event.pointerId)
     }
+
+    const dividerBottom = computed(() => {
+        return `-${parseInt(gap)}px`
+    })
 </script>
 
 <style scoped>
@@ -64,6 +64,7 @@
         border-radius: 10px;
         overflow: hidden;
         height: fit-content;
+        position: relative;
     }
     .item.selected {
         padding: 0 0 0 v-bind(itemIndent);
@@ -73,8 +74,12 @@
             0px 2px 3px var(--color-secondary-emphasis),
             0px -2px 3px var(--color-secondary-emphasis);
     }
-    .divider {
+    .items.has-divider .item:not(:last-child)::after {
+        content: '';
         height: 1px;
         display: block;
+        position: absolute;
+        bottom: v-bind(dividerBottom);
+        background-color: var(--color-secondary-subtle);
     }
 </style>
