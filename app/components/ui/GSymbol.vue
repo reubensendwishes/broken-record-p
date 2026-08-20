@@ -18,6 +18,7 @@
 
 <style scoped>
     .material-symbols-rounded {
+        line-height: 1;
         width: fit-content;
         font-family: 'Material Symbols Rounded';
         font-size: v-bind(fontSize);
