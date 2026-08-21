@@ -1,16 +1,10 @@
 <template>
-    <ul :class="hasDivider && 'has-divider'" class="items d-flex-column">
+    <ul class="items d-flex-column">
         <li
             v-for="(item, index) in items"
             :key="item.id"
-            :class="[
-                sortableChosenId === item.id && 'sortable-chosen',
-                selectedItemId === item.id && 'border-secondary',
-                selectedItemId === item.id && 'selected',
-            ]"
-            class="item text-secondary no-select"
+            class="item text-secondary"
             :data-item-id="item.id"
-            @pointerdown="releaseCapture"
         >
             <slot :item="item" :index="index" />
         </li>
@@ -20,10 +14,7 @@
 <script setup lang="ts" generic="T extends { id: string; name: string }">
     type Props = {
         items: T[]
-        selectedItemId?: string
-        sortableChosenId?: string
-        itemIndent?: `${number}px`
-        hasDivider?: boolean
+        itemIndent?: string
         gap?: string
     }
     type Slots = {
@@ -31,14 +22,7 @@
     }
 
     // props
-    const {
-        items,
-        selectedItemId = '',
-        sortableChosenId = '',
-        itemIndent = '52px',
-        hasDivider = false,
-        gap = '10px',
-    } = defineProps<Props>()
+    const { items, itemIndent = '52px', gap = '10px' } = defineProps<Props>()
 
     // slots
     defineSlots<Slots>()
@@ -59,25 +43,17 @@
         gap: v-bind(gap);
     }
     .item {
-        padding: 2px 2px 2px calc(2px + v-bind(itemIndent));
+        padding: 0 0 0 calc(0px + v-bind(itemIndent));
         border-radius: 10px;
         height: fit-content;
         position: relative;
     }
-    .item.selected {
-        padding: 0 0 0 v-bind(itemIndent);
-    }
-    .item.sortable-chosen {
-        box-shadow:
-            0px 2px 3px var(--color-secondary-emphasis),
-            0px -2px 3px var(--color-secondary-emphasis);
-    }
-    .items.has-divider .item:not(:last-child)::after {
+    .item:not(:last-child)::after {
         content: '';
         height: 1px;
         display: block;
         position: absolute;
-        bottom: v-bind(dividerBottom);
+        inset: auto 0 v-bind(dividerBottom) 0;
         background-color: var(--color-secondary-subtle);
     }
 </style>
