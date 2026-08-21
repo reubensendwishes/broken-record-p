@@ -50,19 +50,17 @@
     }
 
     const dividerBottom = computed(() => {
-        return `-${parseInt(gap)}px`
+        return `-${parseInt(gap) / 2 + 1}px`
     })
 </script>
 
 <style scoped>
     .items {
-        margin-bottom: 10px;
         gap: v-bind(gap);
     }
     .item {
         padding: 2px 2px 2px calc(2px + v-bind(itemIndent));
         border-radius: 10px;
-        overflow: hidden;
         height: fit-content;
         position: relative;
     }
