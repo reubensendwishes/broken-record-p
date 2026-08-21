@@ -9,7 +9,7 @@
             </h3>
         </header>
         <div class="divider bg-primary-subtle" />
-        <UiItems v-slot="{ item }" has-divider :items="items" gap="4px">
+        <UiItems v-slot="{ item }" has-divider :items="items" gap="10px">
             <slot name="item" :item="item" />
         </UiItems>
         <UiEmptyMessage
@@ -81,5 +81,8 @@
         justify-content: center;
         align-items: center;
         gap: 10px;
+    }
+    .items-section > *:not(:last-child) {
+        margin-bottom: 10px;
     }
 </style>
