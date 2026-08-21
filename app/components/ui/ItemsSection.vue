@@ -9,7 +9,7 @@
             </h3>
         </header>
         <div class="divider bg-primary-subtle" />
-        <UiItems v-slot="{ item }" has-divider :items="items" gap="10px">
+        <UiItems v-slot="{ item }" :items="items" gap="10px">
             <slot name="item" :item="item" />
         </UiItems>
         <UiEmptyMessage
