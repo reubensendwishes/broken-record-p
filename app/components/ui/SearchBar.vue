@@ -40,7 +40,7 @@
     const {
         id,
         label = '搜尋欄',
-        placeholder = '搜尋...',
+        placeholder = 'Search...',
         width = 'fit-content',
     } = defineProps<Props>()
 
