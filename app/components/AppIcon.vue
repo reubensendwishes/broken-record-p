@@ -38,4 +38,8 @@
         width: v-bind(width);
         height: v-bind(height);
     }
+    svg {
+        width: 100%;
+        height: 100%;
+    }
 </style>
