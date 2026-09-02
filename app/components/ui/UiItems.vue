@@ -3,7 +3,8 @@
         <li
             v-for="(item, index) in items"
             :key="item.id"
-            class="item text-secondary"
+            :class="'text-' + color"
+            class="item"
             :data-item-id="item.id"
         >
             <slot :item="item" :index="index" />
@@ -16,25 +17,38 @@
         items: T[]
         itemIndent?: string
         gap?: string
+        color?: 'primary' | 'secondary'
     }
     type Slots = {
         default(props: { item: T; index: number }): unknown
     }
 
     // props
-    const { items, itemIndent = '52px', gap = '10px' } = defineProps<Props>()
+    const {
+        items,
+        itemIndent = '50px',
+        gap = '10px',
+        color = 'secondary',
+    } = defineProps<Props>()
 
     // slots
     defineSlots<Slots>()
 
-    const releaseCapture = (event: PointerEvent) => {
-        const target = event.target as HTMLElement
-        if (!target) return
-        target.releasePointerCapture(event.pointerId)
-    }
-
+    const { isDarkMode } = useDarkMode()
     const dividerBottom = computed(() => {
         return `-${parseInt(gap) / 2 + 1}px`
+    })
+    const appConfig = useAppConfig()
+    const dividerBgColor = computed(() => {
+        if (color === 'primary') {
+            return isDarkMode.value
+                ? appConfig.dark.primarySubtle
+                : appConfig.color.primarySubtle
+        } else {
+            return isDarkMode.value
+                ? appConfig.dark.secondarySubtle
+                : appConfig.color.secondarySubtle
+        }
     })
 </script>
 
@@ -54,6 +68,6 @@
         display: block;
         position: absolute;
         inset: auto 0 v-bind(dividerBottom) 0;
-        background-color: var(--color-secondary-subtle);
+        background-color: v-bind(dividerBgColor);
     }
 </style>
