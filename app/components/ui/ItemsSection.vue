@@ -4,9 +4,9 @@
             <div v-if="slots.leading" class="leading">
                 <slot name="leading" />
             </div>
-            <h3 v-if="slots.title" class="title text-truncate">
+            <h2 v-if="slots.title" class="title text-truncate">
                 <slot name="title" />
-            </h3>
+            </h2>
         </header>
         <div class="divider bg-primary-subtle" />
         <UiItems v-slot="{ item }" :items="items" gap="10px">
