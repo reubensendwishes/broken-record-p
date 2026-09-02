@@ -3,6 +3,11 @@
         <li
             v-for="(item, index) in items"
             :key="item.id"
+            :ref="
+                (el) => {
+                    itemRefsMap.set(item.id, el)
+                }
+            "
             :class="[
                 sortableChosenId === item.id && 'sortable-chosen',
                 selectedItemId === item.id && 'border-secondary',
@@ -34,7 +39,7 @@
         items,
         selectedItemId = '',
         sortableChosenId = '',
-        itemIndent = '52px',
+        itemIndent = '46px',
         gap = '10px',
     } = defineProps<Props>()
 
@@ -47,9 +52,20 @@
         target.releasePointerCapture(event.pointerId)
     }
 
-    const dividerBottom = computed(() => {
-        return `-${parseInt(gap)}px`
-    })
+    const itemRefsMap = ref(new Map())
+    watch(
+        () => selectedItemId,
+        (newId) => {
+            const itemRef = itemRefsMap.value.get(newId)
+            if (!itemRef) return
+            nextTick(() => {
+                ;(itemRef as HTMLTimeElement).scrollIntoView({
+                    block: 'center',
+                    behavior: 'smooth',
+                })
+            })
+        },
+    )
 </script>
 
 <style scoped>
