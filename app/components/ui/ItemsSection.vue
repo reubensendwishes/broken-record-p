@@ -9,7 +9,7 @@
             </h3>
         </header>
         <div class="divider bg-primary-subtle" />
-        <UiItems v-slot="{ item }" :items="items" gap="10px">
+        <UiItems v-slot="{ item }" :items="items" gap="10px" item-indent="46px">
             <slot name="item" :item="item" />
         </UiItems>
         <UiEmptyMessage
@@ -23,11 +23,10 @@
                 rounded-right="9999px"
                 padding-x="10px"
                 padding-y="4px"
-                width="min(400px, 100%)"
                 class="view-all-link border-secondary text-secondary"
             >
-                <span class="btn-text">查看全部</span>
-                <UiGSymbol>arrow_forward</UiGSymbol>
+                <span class="btn-text">View all</span>
+                <UiGSymbol font-size="20px">arrow_forward</UiGSymbol>
             </UiLink>
         </div>
     </section>
@@ -59,7 +58,7 @@
     header {
         align-items: center;
         margin-bottom: 10px;
-        gap: 10px;
+        gap: 4px;
     }
     .leading {
         padding: 6px;
@@ -73,14 +72,14 @@
         margin-bottom: 10px;
     }
     .link-wrapper {
-        text-align: center;
+        text-align: end;
     }
     .view-all-link {
         margin: 0 auto;
-        font-size: 20px;
+        font-size: 16px;
         justify-content: center;
         align-items: center;
-        gap: 10px;
+        gap: 6px;
     }
     .items-section > *:not(:last-child) {
         margin-bottom: 10px;
