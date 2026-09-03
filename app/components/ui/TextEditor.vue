@@ -112,6 +112,7 @@
         if (target.textContent === '') {
             target.textContent = textContent
         }
+        target.scrollLeft = 0
         emit('commit', target.textContent)
     }
     const textEditorRef = useTemplateRef('text-editor')
@@ -135,6 +136,7 @@
                 if (!selection) return
                 selection.removeAllRanges()
                 selection.addRange(range)
+                textEditorRef.value.scrollLeft = textEditorRef.value.scrollWidth
             }
         },
     )
@@ -156,5 +158,7 @@
         outline: none;
         width: fit-content;
         max-width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
     }
 </style>
