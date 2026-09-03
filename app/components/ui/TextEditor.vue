@@ -4,6 +4,7 @@
         :class="textEditorClass"
         class="text-editor"
         :contenteditable="isEditable"
+        tabindex="0"
         @input="handleInput"
         @blur="handleBlur"
         @paste.prevent="handlePaste"
