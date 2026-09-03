@@ -41,7 +41,7 @@
     const clean = (content: string) => {
         return content
             .replace(/[^\p{L}\p{N}\p{P}\p{M}\u00A0 ]/gu, '')
-            .replace(/(\p{M}{3})\p{M}+/gu, '$1')
+            .replace(/(\p{M}{2})\p{M}+/gu, '$1')
     }
     const normalize = (target: HTMLElement) => {
         const content = target.textContent
