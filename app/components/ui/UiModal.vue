@@ -29,7 +29,7 @@
                         class="cancel-btn"
                         @click="emit('close')"
                     >
-                        取消
+                        cancel
                     </UiButton>
                     <div class="primary-action">
                         <slot name="primary-action" />
@@ -128,10 +128,10 @@
         max-height: 100dvh;
     }
     .modal-content > *:not(:last-child) {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
     .divider {
-        height: 2px;
+        height: 1px;
     }
     .modal-body {
         overflow: auto;
