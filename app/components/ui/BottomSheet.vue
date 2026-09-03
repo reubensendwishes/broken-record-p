@@ -42,6 +42,7 @@
         hasBackdrop?: boolean
         zIndex?: number
         hasActions?: boolean
+        shadowColor?: 'primary' | 'secondary'
     }
     type Emits = {
         close: []
@@ -60,6 +61,7 @@
         hasBackdrop = false,
         zIndex = 900,
         hasActions = false,
+        shadowColor = 'primary',
     } = defineProps<Props>()
 
     // slots
@@ -68,6 +70,19 @@
     // options
     defineOptions({ inheritAttrs: false })
 
+    const { isDarkMode } = useDarkMode()
+    const appConfig = useAppConfig()
+    const shadowColorRGB = computed(() => {
+        if (shadowColor === 'primary') {
+            return appConfig.rgb.color.primary
+        } else {
+            if (isDarkMode.value) {
+                return appConfig.rgb.dark.secondary
+            } else {
+                return appConfig.rgb.color.secondary
+            }
+        }
+    })
     const sheetContentRef = useTemplateRef('sheet-content')
 
     const focusSheet = () => {
@@ -125,7 +140,7 @@
         width: min(400px, 100%);
     }
     .sheet-content:not(.has-backdrop) {
-        box-shadow: 0 -6px 10px rgba(var(--color-primary-rgb), 0.2);
+        box-shadow: 0 -6px 10px rgba(v-bind(shadowColorRGB), 0.2);
     }
     .sheet-body {
         overflow: auto;
