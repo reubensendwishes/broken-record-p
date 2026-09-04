@@ -2,6 +2,7 @@
     <UiModal
         class="queue"
         has-backdrop
+        :label-id="labelId"
         :has-actions="false"
         @close="emit('close')"
     >
@@ -21,7 +22,7 @@
                     />
                 </template>
                 <template v-else>
-                    <h3 class="title text-truncate">
+                    <h3 :id="labelId" class="title text-truncate">
                         {{ title }}
                     </h3>
                     <UiButton
@@ -69,6 +70,7 @@
         searchBarPlaceholder: string
         currentItemId: string
         itemsColor?: 'primary' | 'secondary'
+        labelId: string
     }
     type Emits = {
         jump: [id: string, index: number]
@@ -81,6 +83,7 @@
         title,
         searchBarPlaceholder,
         itemsColor = 'secondary',
+        labelId,
     } = defineProps<Props>()
 
     // emits
