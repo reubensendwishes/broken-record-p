@@ -26,7 +26,9 @@
                 class="view-all-link border-secondary text-secondary"
             >
                 <span class="btn-text">View all</span>
-                <UiGSymbol font-size="20px">arrow_forward</UiGSymbol>
+                <UiGSymbol aria-hidden="true" font-size="20px"
+                    >arrow_forward</UiGSymbol
+                >
             </UiLink>
         </div>
     </section>

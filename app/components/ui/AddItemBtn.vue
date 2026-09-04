@@ -12,7 +12,7 @@
         class="add-item-btn d-flex-row dashed"
         @click="emit('add:item')"
     >
-        <UiGSymbol>add_2</UiGSymbol>
+        <UiGSymbol aria-hidden="true">add_2</UiGSymbol>
         <span>{{ btnName }}</span>
     </UiButton>
 </template>

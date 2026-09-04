@@ -10,10 +10,11 @@
             <div class="modal-header-content d-flex-row">
                 <template v-if="isSearchBarOpen">
                     <UiButton
+                        aria-label="Close search bar"
                         class="back-btn text-primary"
                         @click="isSearchBarOpen = false"
                     >
-                        <UiGSymbol>arrow_back</UiGSymbol>
+                        <UiGSymbol aria-hidden="true">arrow_back</UiGSymbol>
                     </UiButton>
                     <UiSearchBar
                         id="queue-search-bar"
@@ -27,9 +28,10 @@
                     </h3>
                     <UiButton
                         class="search-btn text-primary"
+                        aria-label="Open search bar"
                         @click="isSearchBarOpen = true"
                     >
-                        <UiGSymbol> search </UiGSymbol>
+                        <UiGSymbol aria-hidden="true"> search </UiGSymbol>
                     </UiButton>
                 </template>
             </div>
@@ -45,12 +47,14 @@
                     :class="'text-' + itemsColor"
                     class="item-content"
                     width="100%"
+                    :aria-current="currentItemId === item.id"
                     @click="emit('jump', item.id, index)"
                 >
                     <div class="btn-content d-flex-row">
                         <span> {{ item.name }}</span>
                         <div
                             v-if="currentItemId === item.id"
+                            aria-hidden="true"
                             class="current-icon-wrapper"
                         >
                             <UiGSymbol>pin_drop</UiGSymbol>
