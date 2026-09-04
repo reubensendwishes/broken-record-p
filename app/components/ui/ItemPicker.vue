@@ -1,6 +1,7 @@
 <template>
     <UiModal
         has-backdrop
+        label-id="item-picker-title"
         class="item-picker"
         :has-actions="false"
         @close="emit('close')"

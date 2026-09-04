@@ -2,12 +2,13 @@
     <UiModal
         :color="color"
         has-backdrop
+        :label-id="labelId"
         class="fields-modal"
         :class="`text-${color}`"
         @close="emit('close')"
     >
         <template #header>
-            <h3 class="modal-title">
+            <h3 id="labelId" class="modal-title">
                 {{ title }}
             </h3>
         </template>
@@ -88,6 +89,7 @@
         primaryActionName: string
         changeCheck?: boolean
         isSubmitting: boolean
+        labelId: string
     }
     type Emits = {
         'primary-action': []
@@ -108,6 +110,7 @@
         primaryActionName,
         changeCheck = false,
         isSubmitting = false,
+        labelId,
     } = defineProps<Props>()
 
     const oldFields = ref(structuredClone(fields.map((field) => toRaw(field))))

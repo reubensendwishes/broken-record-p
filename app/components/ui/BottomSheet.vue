@@ -11,6 +11,10 @@
                 v-focus="hasBackdrop"
                 tabindex="-1"
                 :class="hasBackdrop && 'has-backdrop'"
+                role="dialog"
+                aria-modal="true"
+                :aria-labelledby="labelId"
+                :aria-label="labelId ? undefined : label"
                 class="sheet-content bg-default"
                 @focusin.stop
             >
@@ -43,7 +47,10 @@
         zIndex?: number
         hasActions?: boolean
         shadowColor?: 'primary' | 'secondary'
-    }
+    } & (
+        | { labelId?: string; label: string }
+        | { labelId: string; label?: string }
+    )
     type Emits = {
         close: []
     }
@@ -62,6 +69,8 @@
         zIndex = 900,
         hasActions = false,
         shadowColor = 'primary',
+        labelId,
+        label,
     } = defineProps<Props>()
 
     // slots

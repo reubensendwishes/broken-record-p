@@ -11,6 +11,10 @@
                 v-focus
                 tabindex="-1"
                 class="modal-content bg-default d-flex-column"
+                role="dialog"
+                aria-modal="true"
+                :aria-labelledby="labelId"
+                :aria-label="labelId ? undefined : label"
                 @focusin.stop
             >
                 <template v-if="slots.header">
@@ -29,7 +33,7 @@
                         class="cancel-btn"
                         @click="emit('close')"
                     >
-                        cancel
+                        Cancel
                     </UiButton>
                     <div class="primary-action">
                         <slot name="primary-action" />
@@ -47,7 +51,10 @@
         hasBackdrop?: boolean
         zIndex?: number
         hasActions?: boolean
-    }
+    } & (
+        | { labelId?: string; label: string }
+        | { labelId: string; label?: string }
+    )
     type Emits = {
         close: []
     }
@@ -66,6 +73,8 @@
         zIndex = 1000,
         hasActions = true,
         color = 'primary',
+        labelId,
+        label,
     } = defineProps<Props>()
 
     // slots
