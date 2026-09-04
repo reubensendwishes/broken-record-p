@@ -19,10 +19,16 @@
         <UiButton
             v-if="field.type === 'password'"
             class="toggle-visibility-btn text-primary-subtle"
+            :aria-label="isPasswordVisible ? 'Hide password' : 'Show password'"
+            :aria-pressed="isPasswordVisible"
             @click="isPasswordVisible = !isPasswordVisible"
         >
-            <UiGSymbol v-show="isPasswordVisible">visibility</UiGSymbol>
-            <UiGSymbol v-show="!isPasswordVisible">visibility_off</UiGSymbol>
+            <UiGSymbol v-show="isPasswordVisible" aria-hidden="true"
+                >visibility</UiGSymbol
+            >
+            <UiGSymbol v-show="!isPasswordVisible" aria-hidden="true"
+                >visibility_off</UiGSymbol
+            >
         </UiButton>
     </div>
 </template>

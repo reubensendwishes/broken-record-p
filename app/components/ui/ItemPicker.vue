@@ -14,8 +14,12 @@
                 >
                     {{ title }}
                 </h3>
-                <UiButton class="close-btn text-primary" @click="emit('close')">
-                    <UiGSymbol>close</UiGSymbol>
+                <UiButton
+                    class="close-btn text-primary"
+                    aria-label="Close item picker"
+                    @click="emit('close')"
+                >
+                    <UiGSymbol aria-hidden="true">close</UiGSymbol>
                 </UiButton>
             </div>
             <UiSearchBar

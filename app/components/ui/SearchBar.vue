@@ -18,8 +18,9 @@
             v-if="searchQuery"
             class="text-primary cancel-button"
             @click="searchQuery = ''"
+            aria-label="Clear search query"
         >
-            <UiGSymbol>close</UiGSymbol>
+            <UiGSymbol aria-hidden="true">close</UiGSymbol>
         </UiButton>
     </div>
 </template>

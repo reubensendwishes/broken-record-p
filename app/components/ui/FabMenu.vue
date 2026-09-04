@@ -11,8 +11,8 @@
                 class="fab-menu-backdrop"
                 @click="isMenuExpanded = false"
             />
-            <ul class="fab-menu-list">
-                <li class="fab-menu-item">
+            <ul class="fab-menu-list" role="menu">
+                <li class="fab-menu-item" role="menuitem">
                     <UiButton
                         ref="toggle-btn"
                         padding-x="15px"
@@ -20,9 +20,14 @@
                         rounded-left="9999px"
                         rounded-right="9999px"
                         class="toggle-btn fab-menu-btn text-inverse bg-primary"
+                        aria-haspopup="menu"
+                        :aria-label="
+                            isMenuExpanded ? 'Close menu' : 'Open menu'
+                        "
+                        :aria-expanded="isMenuExpanded"
                         @click="isMenuExpanded = !isMenuExpanded"
                     >
-                        <UiGSymbol>add</UiGSymbol>
+                        <UiGSymbol aria-hidden="true">add</UiGSymbol>
                     </UiButton>
                 </li>
                 <template v-if="isMenuExpanded">
@@ -30,6 +35,7 @@
                         v-for="item in fabItems"
                         :key="item.name"
                         class="fab-menu-item"
+                        role="menuitem"
                     >
                         <UiButton
                             padding-x="18px"

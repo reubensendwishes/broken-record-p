@@ -6,10 +6,15 @@
                 :disabled="selector.currentIndex === 0"
                 :class="`text-${color}`"
                 class="prev-btn"
+                :aria-label="`Decrease ${selector.label}`"
                 @click="handleButtonClick('prev')"
             >
                 <div class="icon-wrapper">
-                    <UiGSymbol class="prev-icon" :opsz="40" font-size="40px"
+                    <UiGSymbol
+                        class="prev-icon"
+                        aria-hidden="true"
+                        :opsz="40"
+                        font-size="40px"
                         >arrow_left</UiGSymbol
                     >
                 </div>
@@ -30,10 +35,16 @@
                 "
                 :class="`text-${color}`"
                 class="next-btn"
+                :aria-label="`Increase ${selector.label}`"
                 @click="handleButtonClick('next')"
             >
                 <div class="icon-wrapper">
-                    <UiGSymbol class="next-icon" :opsz="40" font-size="40px">
+                    <UiGSymbol
+                        class="next-icon"
+                        aria-hidden="true"
+                        :opsz="40"
+                        font-size="40px"
+                    >
                         arrow_right
                     </UiGSymbol>
                 </div>
