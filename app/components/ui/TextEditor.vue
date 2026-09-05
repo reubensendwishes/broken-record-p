@@ -8,7 +8,8 @@
         @input="handleInput"
         @blur="handleBlur"
         @paste.prevent="handlePaste"
-        @keydown.enter.prevent="textEditorRef?.blur()"
+        @keydown.enter.prevent.stop="textEditorRef?.blur()"
+        @keydown.space.stop
         @keydown.esc="emit('close')"
     >
         {{ textContent }}
