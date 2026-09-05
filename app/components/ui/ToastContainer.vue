@@ -22,6 +22,9 @@
                     </UiButton>
                 </div>
             </TransitionGroup>
+            <div class="latest-announcement" role="status" aria-live="polite">
+                {{ latestAnnouncement }}
+            </div>
         </div>
     </Teleport>
 </template>
@@ -40,6 +43,13 @@
             return 'error'
         }
     }
+
+    const latestAnnouncement = computed(() => {
+        const latest = toasts.value[toasts.value.length - 1]
+        if (!latest) return ''
+        const prefix = latest.type === 'error' ? '錯誤' : '成功'
+        return `${prefix}：${latest.message}`
+    })
 </script>
 
 <style scoped>
@@ -91,5 +101,11 @@
     .toast-message {
         overflow-wrap: break-word;
         overflow: auto;
+    }
+    .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
     }
 </style>
