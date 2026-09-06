@@ -1,6 +1,6 @@
 <template>
     <NuxtLayout name="centered">
-        <main>
+        <main id="main">
             <AuthPanel
                 :field-errors="fieldErrors"
                 :fields="fields"

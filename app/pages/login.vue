@@ -1,6 +1,6 @@
 <template>
     <NuxtLayout name="centered">
-        <main>
+        <main id="main">
             <AuthPanel
                 :fields="fields"
                 :field-values="fieldValues"
