@@ -11,9 +11,9 @@
                 @submit="handleSubmit"
                 @validate="handleValidate"
             >
-                <template #button>註冊</template>
-                <span>已經有帳號?</span>
-                <UiLink to="/login" class="text-primary">登入</UiLink>
+                <template #button>Sign Up</template>
+                <span>Already have an account?</span>
+                <UiLink to="/login" class="text-primary">Log In</UiLink>
             </AuthPanel>
         </main>
     </NuxtLayout>

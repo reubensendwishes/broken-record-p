@@ -8,9 +8,9 @@
                 @input="handleInput"
                 @submit="handleSubmit"
             >
-                <template #button>登入</template>
-                <span>沒有帳號嗎?</span>
-                <UiLink to="/signup" class="text-primary">註冊</UiLink>
+                <template #button>Log In</template>
+                <span>Don't have an account?</span>
+                <UiLink to="/signup" class="text-primary">Sign Up</UiLink>
             </AuthPanel>
         </main>
     </NuxtLayout>
