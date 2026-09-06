@@ -1,18 +1,22 @@
 <template>
-    <AuthPanel
-        :field-errors="fieldErrors"
-        :fields="fields"
-        :field-values="fieldValues"
-        :form-error="formError"
-        :with-validation="true"
-        @input="handleInput"
-        @submit="handleSubmit"
-        @validate="handleValidate"
-    >
-        <template #button>註冊</template>
-        <span>已經有帳號?</span>
-        <UiLink to="/login" class="text-primary">登入</UiLink>
-    </AuthPanel>
+    <NuxtLayout name="centered">
+        <main>
+            <AuthPanel
+                :field-errors="fieldErrors"
+                :fields="fields"
+                :field-values="fieldValues"
+                :form-error="formError"
+                :with-validation="true"
+                @input="handleInput"
+                @submit="handleSubmit"
+                @validate="handleValidate"
+            >
+                <template #button>註冊</template>
+                <span>已經有帳號?</span>
+                <UiLink to="/login" class="text-primary">登入</UiLink>
+            </AuthPanel>
+        </main>
+    </NuxtLayout>
 </template>
 
 <script setup lang="ts">
@@ -22,6 +26,7 @@
     // page meta
     definePageMeta({
         middleware: 'guest',
+        layout: false,
     })
 
     // types
