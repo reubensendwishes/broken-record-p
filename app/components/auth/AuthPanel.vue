@@ -1,64 +1,57 @@
 <template>
-    <div class="auth-wrapper d-flex-row">
-        <main class="auth-panel">
-            <div class="auth-form-wrapper">
-                <div class="auth-header">
-                    <AppLogo with-text />
+    <div class="auth-panel">
+        <div class="auth-form-wrapper">
+            <div class="auth-header">
+                <AppLogo with-text />
+            </div>
+            <form
+                class="auth-form d-flex-column"
+                novalidate
+                @submit.prevent="emit('submit')"
+            >
+                <div v-for="field in fields" :key="field.id" class="auth-field">
+                    <UiFloatLabelField
+                        :listen-to-blur="withValidation"
+                        :field="field"
+                        :field-value="fieldValues[field.id]"
+                        @input="
+                            (value) => {
+                                emit('input', field.id, value)
+                            }
+                        "
+                        @blur="emit('validate', field.id)"
+                    />
+                    <p v-if="fieldErrors?.[field.id]" class="field-error">
+                        {{ fieldErrors?.[field.id] }}
+                    </p>
+                    <p
+                        v-if="field.helper"
+                        class="field-helper text-primary-subtle"
+                    >
+                        {{ field.helper }}
+                    </p>
                 </div>
-                <form
-                    class="auth-form d-flex-column"
-                    novalidate
-                    @submit.prevent="emit('submit')"
+                <div v-if="formError" class="form-error">
+                    {{ formError }}
+                </div>
+                <UiButton
+                    rounded-left="10px"
+                    rounded-right="10px"
+                    padding-x="0px"
+                    width="100%"
+                    class="text-inverse bg-primary"
+                    type="submit"
+                    :disabled="isSubmitDisabled"
                 >
-                    <div
-                        v-for="field in fields"
-                        :key="field.id"
-                        class="auth-field"
-                    >
-                        <UiFloatLabelField
-                            :listen-to-blur="withValidation"
-                            :field="field"
-                            :field-value="fieldValues[field.id]"
-                            @input="
-                                (value) => {
-                                    emit('input', field.id, value)
-                                }
-                            "
-                            @blur="emit('validate', field.id)"
-                        />
-                        <p v-if="fieldErrors?.[field.id]" class="field-error">
-                            {{ fieldErrors?.[field.id] }}
-                        </p>
-                        <p
-                            v-if="field.helper"
-                            class="field-helper text-primary-subtle"
-                        >
-                            {{ field.helper }}
-                        </p>
-                    </div>
-                    <div v-if="formError" class="form-error">
-                        {{ formError }}
-                    </div>
-
-                    <UiButton
-                        rounded-left="10px"
-                        rounded-right="10px"
-                        padding-x="0px"
-                        width="100%"
-                        class="text-inverse bg-primary"
-                        type="submit"
-                        :disabled="isSubmitDisabled"
-                    >
-                        <slot name="button" />
-                    </UiButton>
-                </form>
-            </div>
-            <div class="auth-footer font-20">
-                <p class="auth-prompt text-primary-subtle d-flex-row">
-                    <slot />
-                </p>
-            </div>
-        </main>
+                    <slot name="button" />
+                </UiButton>
+            </form>
+        </div>
+        <div class="auth-footer font-20">
+            <p class="auth-prompt text-primary-subtle d-flex-row">
+                <slot />
+            </p>
+        </div>
     </div>
 </template>
 
@@ -114,12 +107,6 @@
 </script>
 
 <style scoped>
-    .auth-wrapper {
-        width: 100%;
-        min-height: 100dvh;
-        justify-content: center;
-        align-items: center;
-    }
     .auth-panel {
         width: min(400px, 100%);
     }
