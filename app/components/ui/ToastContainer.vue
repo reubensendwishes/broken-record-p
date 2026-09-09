@@ -102,7 +102,7 @@
         overflow-wrap: break-word;
         overflow: auto;
     }
-    .visually-hidden {
+    .latest-announcement {
         position: absolute;
         width: 1px;
         height: 1px;
