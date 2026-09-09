@@ -60,7 +60,7 @@
             if (!itemRef) return
             nextTick(() => {
                 ;(itemRef as HTMLTimeElement).scrollIntoView({
-                    block: 'center',
+                    block: 'nearest',
                     behavior: 'smooth',
                 })
             })
