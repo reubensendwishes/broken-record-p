@@ -14,6 +14,7 @@ export type Validators<T extends string = string> = Record<T, Validator>
 
 export type FabItem<T = string> = {
     name: T
+    isDisabled?: boolean
 }
 
 export type FabItems<T = string> = [FabItem<T>, ...FabItem<T>[]]
