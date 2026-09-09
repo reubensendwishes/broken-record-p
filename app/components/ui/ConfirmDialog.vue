@@ -13,7 +13,7 @@
         <p class="confirm-message">{{ confirmDialogState.message }}</p>
         <template #primary-action>
             <UiButton class="text-primary" @click="answer(true)"
-                >confirm</UiButton
+                >Confirm</UiButton
             >
         </template>
     </UiModal>
