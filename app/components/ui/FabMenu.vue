@@ -38,6 +38,7 @@
                         role="menuitem"
                     >
                         <UiButton
+                            :is-disabled="item.isDisabled"
                             padding-x="18px"
                             padding-y="18px"
                             rounded-left="9999px"
