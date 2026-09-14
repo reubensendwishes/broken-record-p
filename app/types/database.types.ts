@@ -197,6 +197,7 @@ export type Database = {
           id: string
           is_starred: boolean
           name: string
+          note: string | null
           p: number
           q: number
           repetitions: number
@@ -208,6 +209,7 @@ export type Database = {
           id?: string
           is_starred?: boolean
           name: string
+          note?: string | null
           p: number
           q: number
           repetitions?: number
@@ -219,6 +221,7 @@ export type Database = {
           id?: string
           is_starred?: boolean
           name?: string
+          note?: string | null
           p?: number
           q?: number
           repetitions?: number
@@ -238,26 +241,26 @@ export type Database = {
       tracks: {
         Row: {
           created_at: string
+          description: string | null
           id: string
           last_played_at: string | null
           name: string
-          note: string | null
           user_id: string
         }
         Insert: {
           created_at?: string
+          description?: string | null
           id?: string
           last_played_at?: string | null
           name: string
-          note?: string | null
           user_id: string
         }
         Update: {
           created_at?: string
+          description?: string | null
           id?: string
           last_played_at?: string | null
           name?: string
-          note?: string | null
           user_id?: string
         }
         Relationships: []
@@ -334,6 +337,7 @@ export type Database = {
           id: string
           is_starred: boolean
           name: string
+          note: string | null
           p: number
           q: number
           repetitions: number
@@ -375,6 +379,7 @@ export type Database = {
           id: string
           is_starred: boolean
           name: string
+          note: string | null
           p: number
           q: number
           repetitions: number
@@ -392,10 +397,10 @@ export type Database = {
         Args: { source_track_id: string }
         Returns: {
           created_at: string
+          description: string | null
           id: string
           last_played_at: string | null
           name: string
-          note: string | null
           user_id: string
         }
         SetofOptions: {
@@ -420,6 +425,7 @@ export type Database = {
           id: string
           is_starred: boolean
           name: string
+          note: string | null
           p: number
           q: number
           repetitions: number
@@ -471,6 +477,7 @@ export type Database = {
           id: string
           is_starred: boolean
           name: string
+          note: string | null
           p: number
           q: number
           repetitions: number
