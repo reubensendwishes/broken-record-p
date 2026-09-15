@@ -6,7 +6,7 @@ export default async function useDarkMode() {
         'dark-mode-preference',
         async () => {
             const { data } = await supabase
-                .from('profiles')
+                .from('user_settings')
                 .select('dark_mode')
                 .eq('id', user.value!.sub)
                 .single()
@@ -19,14 +19,14 @@ export default async function useDarkMode() {
 
     const setDarkMode = async (value: boolean) => {
         isDarkMode.value = value
-        const { data: newProfile } = await supabase
-            .from('profiles')
+        const { data: newSettings } = await supabase
+            .from('user_settings')
             .update({ dark_mode: value })
             .eq('id', user.value!.sub)
             .select()
             .single()
-        if (newProfile) {
-            isDarkMode.value = newProfile.dark_mode
+        if (newSettings) {
+            isDarkMode.value = newSettings.dark_mode
         }
     }
     return { isDarkMode, setDarkMode }
