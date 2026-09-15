@@ -52,7 +52,7 @@
     } = defineProps<Props>()
 
     const appConfig = useAppConfig()
-    const { isDarkMode } = useDarkMode()
+    const { isDarkMode } = await useDarkMode()
 
     const fillColor = computed(() => {
         if (fill === 1) {
