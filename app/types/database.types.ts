@@ -89,6 +89,7 @@ export type Database = {
       profiles: {
         Row: {
           created_at: string
+          dark_mode: boolean
           display_name: string
           en_us_voice_candidates: string[]
           id: string
@@ -97,6 +98,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          dark_mode?: boolean
           display_name: string
           en_us_voice_candidates?: string[]
           id: string
@@ -105,6 +107,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          dark_mode?: boolean
           display_name?: string
           en_us_voice_candidates?: string[]
           id?: string
