@@ -8,7 +8,7 @@
         @input="handleInput"
         @blur="handleBlur"
         @paste.prevent="handlePaste"
-        @keydown.enter.prevent.stop="textEditorRef?.blur()"
+        @keydown.enter.prevent.stop="handleEnterKeydown"
         @keydown.space.stop
         @keydown.esc="emit('close')"
     >
@@ -106,6 +106,11 @@
     const handleInput = (event: Event) => {
         const target = event.target as HTMLElement
         normalize(target)
+    }
+    const handleEnterKeydown = () => {
+        if (isEditable) {
+            textEditorRef.value?.blur()
+        }
     }
     const handleBlur = (event: Event) => {
         const target = event.target as HTMLElement
