@@ -19,11 +19,11 @@ export async function useVoicePreference() {
     const supabase = useSupabaseClient()
     const user = useSupabaseUser()
 
-    const { data: profile } = await useAsyncData(
+    const { data: settings } = await useAsyncData(
         'voice-preference-candidates',
         async () => {
             const { data } = await supabase
-                .from('profiles')
+                .from('user_settings')
                 .select('en_us_voice_candidates, zh_tw_voice_candidates')
                 .eq('id', user.value!.sub)
                 .single()
@@ -58,35 +58,34 @@ export async function useVoicePreference() {
     ) => {
         if (lang === 'zh-TW') {
             zhTwVoice.value = voice
-            const newCandidates = profile.value.zh_tw_voice_candidates
+            const newCandidates = settings.value.zh_tw_voice_candidates
                 .filter((candidate) => candidate !== voice.name)
                 .slice(0, 2)
             newCandidates.unshift(voice.name)
-
-            const { data: newProfile } = await supabase
-                .from('profiles')
+            const { data: newSettings } = await supabase
+                .from('user_settings')
                 .update({ zh_tw_voice_candidates: newCandidates })
                 .eq('id', user.value!.sub)
                 .select()
                 .single()
-            if (newProfile) {
-                profile.value = newProfile
+            if (newSettings) {
+                settings.value = newSettings
             }
         } else if (lang === 'en-US') {
             enUsVoice.value = voice
-            const newCandidates = profile.value.en_us_voice_candidates
+            const newCandidates = settings.value.en_us_voice_candidates
                 .filter((candidate) => candidate !== voice.name)
                 .slice(0, 2)
             newCandidates.unshift(voice.name)
 
-            const { data: newProfile } = await supabase
-                .from('profiles')
+            const { data: newSettings } = await supabase
+                .from('user_settings')
                 .update({ en_us_voice_candidates: newCandidates })
                 .eq('id', user.value!.sub)
                 .select()
                 .single()
-            if (newProfile) {
-                profile.value = newProfile
+            if (newSettings) {
+                settings.value = newSettings
             }
         }
     }
@@ -95,8 +94,8 @@ export async function useVoicePreference() {
         if (newVoices.length === 0) return
         if (!enUsVoice.value && enUsVoices.value.length > 0) {
             let defaultVoice
-            if (profile.value) {
-                for (const candidate of profile.value.en_us_voice_candidates) {
+            if (settings.value) {
+                for (const candidate of settings.value.en_us_voice_candidates) {
                     const voice =
                         enUsVoices.value.find(
                             (voice) => voice.name === candidate,
@@ -117,8 +116,8 @@ export async function useVoicePreference() {
         }
         if (!zhTwVoice.value && zhTwVoices.value.length > 0) {
             let defaultVoice
-            if (profile.value) {
-                for (const candidate of profile.value.zh_tw_voice_candidates) {
+            if (settings.value) {
+                for (const candidate of settings.value.zh_tw_voice_candidates) {
                     const voice =
                         zhTwVoices.value.find(
                             (voice) => voice.name === candidate,

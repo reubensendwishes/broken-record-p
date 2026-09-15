@@ -89,30 +89,21 @@ export type Database = {
       profiles: {
         Row: {
           created_at: string
-          dark_mode: boolean
           display_name: string
-          en_us_voice_candidates: string[]
           id: string
           username: string
-          zh_tw_voice_candidates: string[]
         }
         Insert: {
           created_at?: string
-          dark_mode?: boolean
           display_name: string
-          en_us_voice_candidates?: string[]
           id: string
           username: string
-          zh_tw_voice_candidates?: string[]
         }
         Update: {
           created_at?: string
-          dark_mode?: boolean
           display_name?: string
-          en_us_voice_candidates?: string[]
           id?: string
           username?: string
-          zh_tw_voice_candidates?: string[]
         }
         Relationships: []
       }
@@ -273,6 +264,35 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      user_settings: {
+        Row: {
+          dark_mode: boolean
+          en_us_voice_candidates: string[]
+          id: string
+          zh_tw_voice_candidates: string[]
+        }
+        Insert: {
+          dark_mode?: boolean
+          en_us_voice_candidates?: string[]
+          id: string
+          zh_tw_voice_candidates?: string[]
+        }
+        Update: {
+          dark_mode?: boolean
+          en_us_voice_candidates?: string[]
+          id?: string
+          zh_tw_voice_candidates?: string[]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_settings_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
