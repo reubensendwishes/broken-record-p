@@ -90,20 +90,26 @@ export type Database = {
         Row: {
           created_at: string
           display_name: string
+          en_us_voice_candidates: string[]
           id: string
           username: string
+          zh_tw_voice_candidates: string[]
         }
         Insert: {
           created_at?: string
           display_name: string
+          en_us_voice_candidates?: string[]
           id: string
           username: string
+          zh_tw_voice_candidates?: string[]
         }
         Update: {
           created_at?: string
           display_name?: string
+          en_us_voice_candidates?: string[]
           id?: string
           username?: string
+          zh_tw_voice_candidates?: string[]
         }
         Relationships: []
       }
