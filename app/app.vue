@@ -17,6 +17,29 @@
             class: ['bg-default', 'text-primary'],
         },
     })
+    const { isVoicesLoading } = await useVoicePreference()
+    const voices = useState<SpeechSynthesisVoice[]>('speech-voices', () => [])
+    const updateVoices = () => {
+        voices.value = window.speechSynthesis.getVoices()
+        if (voices.value.length > 0) isVoicesLoading.value = false
+    }
+    let loadingTimer: ReturnType<typeof setTimeout>
+    onMounted(() => {
+        updateVoices()
+        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                updateVoices()
+                isVoicesLoading.value = false
+            }
+        }
+
+        loadingTimer = setTimeout(() => {
+            isVoicesLoading.value = false
+        }, 800)
+    })
+    onUnmounted(() => {
+        clearTimeout(loadingTimer)
+    })
 </script>
 <style scoped>
     .skip-link {
