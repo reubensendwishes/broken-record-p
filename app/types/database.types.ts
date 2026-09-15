@@ -533,6 +533,10 @@ export type Database = {
         }
         Returns: Record<string, unknown>
       }
+      text_array_max_length: {
+        Args: { arr: string[]; max_len: number }
+        Returns: boolean
+      }
     }
     Enums: {
       bar_lang: "en-US" | "zh-TW"
