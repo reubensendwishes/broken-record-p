@@ -3,8 +3,6 @@
         <svg
             v-if="iconName === 'record-list'"
             class="record-list-icon"
-            width="30"
-            height="30"
             viewBox="0 0 30 30"
             xmlns="http://www.w3.org/2000/svg"
         >
@@ -15,8 +13,6 @@
         <svg
             v-if="iconName === 'up'"
             class="up-icon"
-            width="30"
-            height="30"
             viewBox="0 0 30 30"
             xmlns="http://www.w3.org/2000/svg"
         >
@@ -28,8 +24,6 @@
         <svg
             v-if="iconName === 'down'"
             class="down-icon"
-            width="30"
-            height="30"
             viewBox="0 0 30 30"
             xmlns="http://www.w3.org/2000/svg"
         >
