@@ -34,7 +34,7 @@
     // slots
     defineSlots<Slots>()
 
-    const { isDarkMode } = useDarkMode()
+    const { isDarkMode } = await useDarkMode()
     const dividerBottom = computed(() => {
         return `-${parseInt(gap) / 2 + 1}px`
     })
