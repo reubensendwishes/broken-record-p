@@ -4,8 +4,8 @@
             <div v-if="slots.leading" class="leading">
                 <slot name="leading" />
             </div>
-            <h2 v-if="slots.title" class="title text-truncate">
-                <slot name="title" />
+            <h2 class="title text-truncate">
+                {{ title }}
             </h2>
         </header>
         <div class="divider bg-primary-subtle" />
@@ -13,44 +13,30 @@
             <slot name="item" :item="item" />
         </UiItems>
         <UiEmptyMessage
-            v-if="items.length === 0"
+            v-if="items.length === 0 && emptyMessage"
             :empty-message="emptyMessage"
         />
-        <div v-if="viewAllRoute" class="link-wrapper">
-            <UiLink
-                :to="viewAllRoute"
-                rounded-left="9999px"
-                rounded-right="9999px"
-                padding-x="10px"
-                padding-y="4px"
-                class="view-all-link border-secondary text-secondary"
-            >
-                <span class="btn-text">View all</span>
-                <UiGSymbol aria-hidden="true" font-size="20px"
-                    >arrow_forward</UiGSymbol
-                >
-            </UiLink>
+        <div v-if="slots.extra" class="section-extra">
+            <slot name="extra" />
         </div>
     </section>
 </template>
 
 <script setup lang="ts" generic="T extends { id: string; name: string }">
-    import type { RouteLocationRaw } from 'vue-router'
-
     // types
     type Props = {
         items: T[]
-        emptyMessage: string
-        viewAllRoute?: RouteLocationRaw
+        title: string
+        emptyMessage?: string
     }
     type Slots = {
         leading(): unknown
-        title(): unknown
         item(props: { item: T }): unknown
+        extra(): unknown
     }
 
     // props
-    const { items, emptyMessage, viewAllRoute } = defineProps<Props>()
+    const { items, emptyMessage = '' } = defineProps<Props>()
 
     // slots
     const slots = defineSlots<Slots>()
@@ -73,16 +59,7 @@
         height: 1px;
         margin-bottom: 10px;
     }
-    .link-wrapper {
-        text-align: end;
-    }
-    .view-all-link {
-        margin: 0 auto;
-        font-size: 16px;
-        justify-content: center;
-        align-items: center;
-        gap: 6px;
-    }
+
     .items-section > *:not(:last-child) {
         margin-bottom: 10px;
     }
