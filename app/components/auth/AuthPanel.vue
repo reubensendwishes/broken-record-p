@@ -108,7 +108,7 @@
 
 <style scoped>
     .auth-panel {
-        width: min(400px, 100%);
+        width: min(400px, 100dvw);
     }
     .auth-form-wrapper {
         padding: 40px 20px;
@@ -135,9 +135,9 @@
         align-items: center;
         line-height: 1;
     }
-    .auth-field > .field-error,
-    .auth-field > .field-helper,
-    .ahth-form > .form-error {
+    .field-error,
+    .field-helper,
+    .form-error {
         font-size: 18px;
     }
 </style>
