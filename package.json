@@ -10,6 +10,7 @@
         "postinstall": "nuxt prepare"
     },
     "dependencies": {
+        "@floating-ui/vue": "^2.0.1",
         "@nuxt/eslint": "^1.15.2",
         "@nuxt/fonts": "^0.14.0",
         "@nuxtjs/supabase": "^2.0.5",
@@ -20,6 +21,7 @@
     "devDependencies": {
         "prettier": "^3.8.1",
         "sass": "^1.99.0",
-        "supabase": "^2.91.2"
+        "supabase": "^2.91.2",
+        "vue-component-type-helpers": "^3.3.11"
     }
 }
