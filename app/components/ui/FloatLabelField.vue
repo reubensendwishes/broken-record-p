@@ -79,7 +79,7 @@
         align-items: center;
         margin-bottom: 6px;
         border-radius: 10px;
-        height: 50px;
+        height: 52px;
         overflow: hidden;
     }
     .float-label-field:focus-within {
