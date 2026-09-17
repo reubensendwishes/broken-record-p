@@ -1,5 +1,6 @@
 <template>
     <button
+        ref="button"
         class="button"
         :type="type"
         :disabled="isDisabled"
@@ -40,6 +41,9 @@
     } = defineProps<Props>()
 
     const emit = defineEmits<Emits>()
+
+    const buttonRef = useTemplateRef('button')
+    defineExpose({ el: buttonRef })
 </script>
 
 <style scoped>
