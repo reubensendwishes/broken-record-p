@@ -8,13 +8,16 @@
                     class="toast d-flex-row border-primary bg-default text-primary"
                 >
                     <div class="icon-wrapper">
-                        <UiGSymbol :aria-label="toast.type">{{
-                            toastIcon(toast.type)
-                        }}</UiGSymbol>
+                        <UiGSymbol
+                            :aria-label="
+                                toast.type === 'success' ? '成功' : '錯誤'
+                            "
+                            >{{ toastIcon(toast.type) }}</UiGSymbol
+                        >
                     </div>
                     <p class="toast-message">{{ toast.message }}</p>
                     <UiButton
-                        aria-label="Close toast"
+                        aria-label="關閉toast"
                         class="text-primary"
                         @click="removeToast(toast.id)"
                     >
