@@ -12,11 +12,11 @@
                     id="item-picker-title"
                     class="title text-truncate text-primary"
                 >
-                    {{ title }}
+                    選取
                 </h3>
                 <UiButton
                     class="close-btn text-primary"
-                    aria-label="關閉選取列表視窗"
+                    aria-label="關閉選取清單"
                     @click="emit('close')"
                 >
                     <UiGSymbol aria-hidden="true">close</UiGSymbol>
@@ -32,7 +32,14 @@
         </template>
         <template #default>
             <UiItems v-slot="{ item }" item-indent="0px" :items="displayItems">
-                <slot :item="item" />
+                <UiButton
+                    class="text-secondary item-content text-truncate"
+                    width="100%"
+                    text-align="start"
+                    @click="emit('select:item', item.id)"
+                >
+                    {{ item.name }}
+                </UiButton>
             </UiItems>
             <UiEmptyMessage
                 v-if="displayItems.length === 0"
@@ -55,24 +62,18 @@
     // types
     type Props = {
         items: T[]
-        title: string
         placeholder: string
     }
     type Emits = {
+        'select:item': [id: string]
         close: []
-    }
-    type Slots = {
-        default(props: { item: T }): unknown
     }
 
     // props
-    const { items, title, placeholder } = defineProps<Props>()
+    const { items, placeholder } = defineProps<Props>()
 
     // emits
     const emit = defineEmits<Emits>()
-
-    // slots
-    defineSlots<Slots>()
 
     const searchQuery = ref('')
     const displayItems = computed(() => {
