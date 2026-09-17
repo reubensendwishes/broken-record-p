@@ -1,7 +1,7 @@
 <template>
     <div class="dropdown">
         <UiItems
-            v-if="isMenuOpen"
+            v-if="isListOpen"
             v-slot="{ item }"
             ref="ui-items"
             v-focus
@@ -9,7 +9,7 @@
             :style="floatingStyles"
             :color="color"
             :class="'border-' + color"
-            class="dropdown-menu bg-default"
+            class="dropdown-list bg-default"
             gap="0px"
             role="listbox"
             :aria-label="title"
@@ -25,6 +25,7 @@
         >
             <div
                 :id="item.id"
+                :class="'text-' + color"
                 class="option d-flex-row"
                 role="option"
                 :aria-selected="selectedOptionId === item.id"
@@ -68,7 +69,7 @@
     type Props = {
         color?: 'primary' | 'secondary'
         title: string
-        isMenuOpen: boolean
+        isListOpen: boolean
         options: T[]
         trigger: HTMLElement | null
         selectedOptionId: string
@@ -82,7 +83,7 @@
     const {
         color = 'primary',
         title,
-        isMenuOpen,
+        isListOpen,
         options,
         trigger,
         selectedOptionId,
@@ -94,8 +95,8 @@
     const uiItemsRef =
         useTemplateRef<ComponentExposed<typeof UiItems>>('ui-items')
     const reference = computed(() => trigger)
-    const dropdownMenuRef = computed(() => uiItemsRef.value?.el ?? null)
-    const { floatingStyles } = useFloating(reference, dropdownMenuRef, {
+    const dropdownListRef = computed(() => uiItemsRef.value?.el ?? null)
+    const { floatingStyles } = useFloating(reference, dropdownListRef, {
         whileElementsMounted: autoUpdate,
         placement: 'bottom-start',
         middleware: [
@@ -129,8 +130,8 @@
     const handlePointerDown = (event: Event) => {
         const target = event.target as HTMLElement
         if (
-            dropdownMenuRef.value &&
-            !dropdownMenuRef.value.contains(target) &&
+            dropdownListRef.value &&
+            !dropdownListRef.value.contains(target) &&
             trigger &&
             !trigger.contains(target)
         ) {
@@ -138,7 +139,7 @@
         }
     }
     watch(
-        () => isMenuOpen,
+        () => isListOpen,
         (newValue) => {
             if (newValue) {
                 activeOptionId.value = selectedOptionId ?? ''
@@ -155,7 +156,7 @@
 </script>
 
 <style scoped>
-    .dropdown-menu {
+    .dropdown-list {
         width: 300px;
         border-radius: 10px;
         padding: 10px;
