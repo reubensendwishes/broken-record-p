@@ -7,14 +7,12 @@
     >
         <template #header>
             <h3 id="confirm-dialog-title" class="text-primary confirm-title">
-                Confirm dialog
+                確認視窗
             </h3>
         </template>
         <p class="confirm-message">{{ confirmDialogState.message }}</p>
         <template #primary-action>
-            <UiButton class="text-primary" @click="answer(true)"
-                >Confirm</UiButton
-            >
+            <UiButton class="text-primary" @click="answer(true)">確認</UiButton>
         </template>
     </UiModal>
 </template>

@@ -19,7 +19,7 @@
         <UiButton
             v-if="field.type === 'password'"
             class="toggle-visibility-btn text-primary-subtle"
-            :aria-label="isPasswordVisible ? 'Hide password' : 'Show password'"
+            :aria-label="isPasswordVisible ? '隱藏密碼' : '展示密碼'"
             :aria-pressed="isPasswordVisible"
             @click="isPasswordVisible = !isPasswordVisible"
         >

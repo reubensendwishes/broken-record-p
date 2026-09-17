@@ -6,7 +6,7 @@
                 :disabled="selector.currentIndex === 0"
                 :class="`text-${color}`"
                 class="prev-btn"
-                :aria-label="`Decrease ${selector.label}`"
+                aria-label="上一個"
                 @click="handleButtonClick('prev')"
             >
                 <div class="icon-wrapper">
@@ -35,7 +35,7 @@
                 "
                 :class="`text-${color}`"
                 class="next-btn"
-                :aria-label="`Increase ${selector.label}`"
+                aria-label="下一個"
                 @click="handleButtonClick('next')"
             >
                 <div class="icon-wrapper">
