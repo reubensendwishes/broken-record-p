@@ -22,7 +22,7 @@
                         class="toggle-btn fab-menu-btn text-inverse bg-primary"
                         aria-haspopup="menu"
                         :aria-label="
-                            isMenuExpanded ? 'Close menu' : 'Open menu'
+                            isMenuExpanded ? '關閉按鈕選單' : '打開按鈕選單'
                         "
                         :aria-expanded="isMenuExpanded"
                         @click="isMenuExpanded = !isMenuExpanded"
@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts" generic="T extends string">
-    import type { FabItems } from '~/types'
+    import type { FabItems } from '@/types/index'
 
     // types
     type Props = {

@@ -16,7 +16,7 @@
                 </h3>
                 <UiButton
                     class="close-btn text-primary"
-                    aria-label="Close item picker"
+                    aria-label="關閉選取列表視窗"
                     @click="emit('close')"
                 >
                     <UiGSymbol aria-hidden="true">close</UiGSymbol>
@@ -31,7 +31,7 @@
             />
         </template>
         <template #default>
-            <UiItems item-indent="0px" :items="displayItems" v-slot="{ item }">
+            <UiItems v-slot="{ item }" item-indent="0px" :items="displayItems">
                 <slot :item="item" />
             </UiItems>
             <UiEmptyMessage
@@ -84,9 +84,9 @@
     })
     const emptyMessage = computed(() => {
         if (items.length === 0) {
-            return 'No tracks available'
+            return '沒有可選取項目。'
         }
-        return 'No results found'
+        return '無任何搜尋結果。'
     })
 </script>
 

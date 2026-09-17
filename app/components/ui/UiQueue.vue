@@ -10,7 +10,7 @@
             <div class="modal-header-content d-flex-row">
                 <template v-if="isSearchBarOpen">
                     <UiButton
-                        aria-label="Close search bar"
+                        aria-label="關閉搜尋欄"
                         class="back-btn text-primary"
                         @click="isSearchBarOpen = false"
                     >
@@ -28,7 +28,7 @@
                     </h3>
                     <UiButton
                         class="search-btn text-primary"
-                        aria-label="Open search bar"
+                        aria-label="開啟搜尋欄"
                         @click="isSearchBarOpen = true"
                     >
                         <UiGSymbol aria-hidden="true"> search </UiGSymbol>
@@ -38,10 +38,10 @@
         </template>
         <template #default>
             <UiItems
+                v-slot="{ item, index }"
                 :color="itemsColor"
                 item-indent="0"
                 :items="items"
-                v-slot="{ item, index }"
             >
                 <UiButton
                     :class="'text-' + itemsColor"

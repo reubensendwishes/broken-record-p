@@ -33,7 +33,7 @@
                         class="cancel-btn"
                         @click="emit('close')"
                     >
-                        Cancel
+                        取消
                     </UiButton>
                     <div class="primary-action">
                         <slot name="primary-action" />
