@@ -12,10 +12,10 @@
                 tabindex="-1"
                 class="modal-content bg-default d-flex-column"
                 role="dialog"
-                aria-modal="true"
+                :aria-modal="hasBackdrop"
                 :aria-labelledby="labelId"
                 :aria-label="labelId ? undefined : label"
-                @focusin.stop
+                @focusin="handleFocusin"
             >
                 <template v-if="slots.header">
                     <div class="modal-header">
@@ -90,8 +90,15 @@
     const focusModal = () => {
         modalContentRef.value?.focus()
     }
+    const handleFocusin = (event: FocusEvent) => {
+        if (hasBackdrop) {
+            event.stopPropagation()
+        }
+    }
     onMounted(() => {
-        document.body.addEventListener('focusin', focusModal)
+        if (hasBackdrop) {
+            document.body.addEventListener('focusin', focusModal)
+        }
     })
     onBeforeUnmount(() => {
         document.body.removeEventListener('focusin', focusModal)
