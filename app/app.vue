@@ -7,7 +7,10 @@
 </template>
 <script lang="ts" setup>
     const { confirmDialogState } = useConfirm()
-    const { isDarkMode } = await useDarkMode()
+    const { isDarkMode, fetchDarkMode } = useDarkMode()
+
+    await fetchDarkMode()
+
     useHead({
         htmlAttrs: {
             lang: 'zh-Hant',

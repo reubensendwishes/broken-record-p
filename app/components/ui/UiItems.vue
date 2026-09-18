@@ -49,7 +49,7 @@
     const itemsRef = useTemplateRef('items')
     defineExpose({ el: itemsRef })
 
-    const { isDarkMode } = await useDarkMode()
+    const { isDarkMode } = useDarkMode()
     const dividerBottom = computed(() => {
         return `-${parseInt(gap) / 2 + 1}px`
     })

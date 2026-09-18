@@ -78,7 +78,7 @@
     // options
     defineOptions({ inheritAttrs: false })
 
-    const { isDarkMode } = await useDarkMode()
+    const { isDarkMode } = useDarkMode()
     const appConfig = useAppConfig()
     const shadowColorRGB = computed(() => {
         if (shadowColor === 'primary') {
