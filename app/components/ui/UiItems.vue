@@ -8,11 +8,7 @@
                 }
             "
             :key="item.id"
-            :class="
-                activeItemId === item.id
-                    ? `text-${color}-emphasis`
-                    : `text-${color}`
-            "
+            :class="'text-' + color"
             class="item"
             :data-item-id="item.id"
         >
@@ -23,7 +19,6 @@
 
 <script setup lang="ts" generic="T extends { id: string; name: string }">
     type Props = {
-        activeItemId?: string
         items: T[]
         itemIndent?: string
         gap?: string
@@ -35,7 +30,6 @@
 
     // props
     const {
-        activeItemId = '',
         items,
         itemIndent = '50px',
         gap = '10px',
@@ -65,15 +59,6 @@
                 : appConfig.color.secondarySubtle
         }
     })
-
-    watch(
-        () => activeItemId,
-        (newId) => {
-            const newActiveItemRef = itemRefsMap.value.get(newId)
-            if (!newActiveItemRef) return
-            newActiveItemRef.scrollIntoView({ block: 'nearest' })
-        },
-    )
 </script>
 
 <style scoped>
