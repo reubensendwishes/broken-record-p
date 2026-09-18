@@ -1,46 +1,22 @@
 <template>
     <div class="dropdown">
-        <UiItems
+        <UiListBox
             v-if="isListOpen"
-            v-slot="{ item }"
-            ref="ui-items"
+            ref="list-box"
             v-focus
-            :active-item-id="activeOptionId"
-            :style="floatingStyles"
+            :aria-label="title"
             :color="color"
             :class="'border-' + color"
-            class="dropdown-list bg-default"
-            gap="0px"
-            role="listbox"
-            :aria-label="title"
-            tabindex="0"
-            :aria-activedescendant="activeOptionId"
-            :items="options"
-            item-indent="0px"
-            @keydown.arrow-up.prevent="prev"
-            @keydown.arrow-down.prevent="next"
-            @keydown.enter.prevent="emit('select:option', activeOptionId)"
-            @keydown.space.prevent="emit('select:option', activeOptionId)"
+            :options="options"
+            :selected-option-id="selectedOptionId"
+            :style="floatingStyles"
+            @select:option="
+                (id: string) => {
+                    emit('select:option', id)
+                }
+            "
             @keydown.esc.prevent="emit('close')"
-        >
-            <div
-                :id="item.id"
-                :class="'text-' + color"
-                class="option d-flex-row"
-                role="option"
-                :aria-selected="selectedOptionId === item.id"
-                @click="emit('select:option', item.id)"
-            >
-                <div class="option-name text-truncate">
-                    {{ item.name }}
-                </div>
-                <UiGSymbol
-                    v-if="selectedOptionId === item.id"
-                    aria-hidden="true"
-                    >check</UiGSymbol
-                >
-            </div>
-        </UiItems>
+        />
     </div>
 </template>
 
@@ -63,7 +39,7 @@
         autoUpdate,
     } from '@floating-ui/vue'
     import type { ComponentExposed } from 'vue-component-type-helpers'
-    import UiItems from '@/components/ui/UiItems.vue'
+    import type ListBox from '@/components/ui/ListBox.vue'
 
     // types
     type Props = {
@@ -92,10 +68,10 @@
     // emits
     const emit = defineEmits<Emits>()
 
-    const uiItemsRef =
-        useTemplateRef<ComponentExposed<typeof UiItems>>('ui-items')
+    const listBoxRef =
+        useTemplateRef<ComponentExposed<typeof ListBox>>('list-box')
     const reference = computed(() => trigger)
-    const dropdownListRef = computed(() => uiItemsRef.value?.el ?? null)
+    const dropdownListRef = computed(() => listBoxRef.value?.el ?? null)
     const { floatingStyles } = useFloating(reference, dropdownListRef, {
         whileElementsMounted: autoUpdate,
         placement: 'bottom-start',
@@ -112,21 +88,7 @@
             }),
         ],
     })
-    const activeOptionId = ref('')
-    const prev = () => {
-        const currentIndex = options.findIndex(
-            (option) => option.id === activeOptionId.value,
-        )
-        const prevIndex = (currentIndex - 1 + options.length) % options.length
-        activeOptionId.value = options[prevIndex]!.id
-    }
-    const next = () => {
-        const currentIndex = options.findIndex(
-            (option) => option.id === activeOptionId.value,
-        )
-        const nextIndex = (currentIndex + 1) % options.length
-        activeOptionId.value = options[nextIndex]!.id
-    }
+
     const handlePointerDown = (event: Event) => {
         const target = event.target as HTMLElement
         if (
@@ -142,7 +104,6 @@
         () => isListOpen,
         (newValue) => {
             if (newValue) {
-                activeOptionId.value = selectedOptionId ?? ''
                 document.addEventListener('pointerdown', handlePointerDown)
             } else {
                 document.removeEventListener('pointerdown', handlePointerDown)
@@ -154,26 +115,8 @@
         document.removeEventListener('pointerdown', handlePointerDown)
     })
 </script>
-
 <style scoped>
-    .dropdown-list {
-        width: 300px;
-        border-radius: 10px;
+    .list-box {
         padding: 10px;
-        z-index: 600;
-        overflow-y: auto;
-        outline: none;
-    }
-    .option {
-        height: 42px;
-        cursor: pointer;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .option.text-primary:hover {
-        color: var(--color-primary-emphasis);
-    }
-    .option.text-secondary:hover {
-        color: var(--color-secondary-emphasis);
     }
 </style>
