@@ -14,14 +14,15 @@
 
     // props
     const {
-        paddingX = '6px',
-        paddingY = '6px',
+        paddingX = '8px',
+        paddingY = '4px',
         bgColor = 'primary',
     } = defineProps<Props>()
 </script>
 
 <style scoped>
     .badge {
+        font-size: 20px;
         padding: v-bind(paddingY) v-bind(paddingX);
         white-space: nowrap;
     }
