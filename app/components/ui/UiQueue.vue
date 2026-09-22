@@ -18,6 +18,7 @@
                     </UiButton>
                     <UiSearchBar
                         id="queue-search-bar"
+                        v-model="searchQuery"
                         :placeholder="searchBarPlaceholder"
                         @close="isSearchBarOpen = false"
                     />
@@ -41,7 +42,7 @@
                 v-slot="{ item, index }"
                 :color="itemsColor"
                 item-indent="0"
-                :items="items"
+                :items="displayItems"
             >
                 <UiButton
                     :class="'text-' + itemsColor"
@@ -94,6 +95,12 @@
     const emit = defineEmits<Emits>()
 
     const isSearchBarOpen = ref(false)
+    const searchQuery = ref('')
+    const displayItems = computed(() =>
+        items.filter((item) =>
+            item.name.toLowerCase().includes(searchQuery.value.toLowerCase()),
+        ),
+    )
 </script>
 
 <style scoped>
