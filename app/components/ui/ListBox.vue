@@ -26,6 +26,7 @@
             "
             class="option d-flex-row"
             role="option"
+            @click="emit('select:option', option.id)"
         >
             <span class="option-name">{{ option.name }}</span>
             <UiGSymbol v-if="selectedOptionId === option.id" aria-hidden="true"
