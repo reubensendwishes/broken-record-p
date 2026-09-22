@@ -53,6 +53,7 @@ body {
     font-weight: 400;
     font-style: normal;
     line-height: 1.25;
+    letter-spacing: 2%;
     font-size: 24px;
     scrollbar-color: var(--color-primary-subtle) transparent;
 }
@@ -91,6 +92,7 @@ button {
     border: none;
     padding: 0;
     cursor: pointer;
+    letter-spacing: 2%;
 }
 
 button:disabled {
