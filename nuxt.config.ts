@@ -78,6 +78,11 @@ export default defineNuxtConfig({
                     },
                 },
             },
+            {
+                name: 'Roboto',
+                provider: 'fontsource',
+                weights: [500],
+            },
         ],
     },
     supabase: {
@@ -86,6 +91,11 @@ export default defineNuxtConfig({
             callback: '/confirm',
             exclude: ['/signup', '/verify-email'],
             saveRedirectToCookie: true,
+        },
+    },
+    runtimeConfig: {
+        public: {
+            hcaptchaSiteKey: '',
         },
     },
 })

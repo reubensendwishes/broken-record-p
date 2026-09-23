@@ -7,7 +7,7 @@
             <form
                 class="auth-form d-flex-column"
                 novalidate
-                @submit.prevent="emit('submit')"
+                @submit.prevent="handleFormSubmit"
             >
                 <div v-for="field in fields" :key="field.id" class="auth-field">
                     <UiFloatLabelField
@@ -15,7 +15,7 @@
                         :field="field"
                         :field-value="fieldValues[field.id]"
                         @input="
-                            (value) => {
+                            (value: string) => {
                                 emit('input', field.id, value)
                             }
                         "
@@ -34,6 +34,7 @@
                 <div v-if="formError" class="form-error">
                     {{ formError }}
                 </div>
+
                 <UiButton
                     rounded-left="10px"
                     rounded-right="10px"
@@ -43,8 +44,15 @@
                     type="submit"
                     :disabled="isSubmitDisabled"
                 >
-                    <slot name="button" />
+                    {{ feature === 'login' ? '登入' : '註冊' }}
                 </UiButton>
+                <div class="auth-divider">
+                    <span>或</span>
+                </div>
+                <AuthGSIMaterialButton
+                    :feature="feature"
+                    @click="emit('google')"
+                />
             </form>
         </div>
         <div class="auth-footer font-20">
@@ -52,11 +60,19 @@
                 <slot />
             </p>
         </div>
+        <ClientOnly>
+            <VueHcaptcha
+                ref="hcaptchaRef"
+                size="invisible"
+                :sitekey="config.public.hcaptchaSiteKey"
+            />
+        </ClientOnly>
     </div>
 </template>
 
 <script setup lang="ts" generic="T extends string">
-    import type { AuthFields } from '~/types'
+    import VueHcaptcha from '@hcaptcha/vue3-hcaptcha'
+    import type { AuthFields } from '@/types/index'
 
     // types
     type Props = {
@@ -65,9 +81,11 @@
         fields: AuthFields<T>
         fieldValues: { [K in T]: string }
         withValidation?: boolean
+        feature: 'signup' | 'login'
     }
     type Emit = {
-        submit: []
+        submit: [captchaToken: string]
+        google: []
         input: [id: T, value: string]
         validate: [id: T]
     }
@@ -79,6 +97,7 @@
         fields,
         fieldValues,
         withValidation = false,
+        feature,
     } = defineProps<Props>()
 
     // emits
@@ -104,6 +123,28 @@
         if (formError !== '') return true
         return false
     })
+
+    const config = useRuntimeConfig()
+    const hcaptchaRef = ref<InstanceType<typeof VueHcaptcha>>()
+
+    const handleFormSubmit = async () => {
+        if (isSubmitting.value) return
+        isSubmitting.value = true
+        try {
+            const res = await hcaptchaRef.value?.executeAsync()
+            if (!res) return
+            emit('submit', res.response)
+        } catch {
+            // 使用者取消驗證或驗證發生錯誤，不送出表單
+        } finally {
+            isSubmitting.value = false
+        }
+    }
+    defineExpose({
+        resetCaptcha: () => {
+            hcaptchaRef.value?.reset()
+        },
+    })
 </script>
 
 <style scoped>
@@ -111,17 +152,20 @@
         width: min(400px, 100dvw);
     }
     .auth-form-wrapper {
-        padding: 40px 20px;
+        padding: 20px;
         border: 2px solid var(--color-primary);
         border-radius: 20px;
         margin-bottom: 20px;
     }
     .auth-header {
-        margin-bottom: 40px;
+        margin-bottom: 20px;
         text-align: center;
     }
     .auth-form {
         gap: 20px;
+    }
+    .auth-field > *:not(:last-child) {
+        margin-bottom: 6px;
     }
     .auth-footer {
         padding: 20px 0;
@@ -138,6 +182,20 @@
     .field-error,
     .field-helper,
     .form-error {
-        font-size: 18px;
+        font-size: 16px;
+    }
+    .auth-divider {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--color-muted);
+        font-size: 16px;
+    }
+    .auth-divider::before,
+    .auth-divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background-color: var(--color-muted);
     }
 </style>

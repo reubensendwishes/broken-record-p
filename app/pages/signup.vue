@@ -2,18 +2,20 @@
     <NuxtLayout name="centered">
         <main id="main">
             <AuthPanel
+                ref="auth-panel"
                 :field-errors="fieldErrors"
                 :fields="fields"
                 :field-values="fieldValues"
                 :form-error="formError"
                 :with-validation="true"
+                feature="signup"
                 @input="handleInput"
                 @submit="handleSubmit"
                 @validate="handleValidate"
+                @google="handleGoogleSignup"
             >
-                <template #button>Sign Up</template>
-                <span>Already have an account?</span>
-                <UiLink to="/login" class="text-primary">Log In</UiLink>
+                <span>已經有帳號嗎？</span>
+                <UiLink to="/login" class="text-primary">登入</UiLink>
             </AuthPanel>
         </main>
     </NuxtLayout>
@@ -21,7 +23,9 @@
 
 <script setup lang="ts">
     import type { FetchError } from 'ofetch'
-    import type { AuthFields, Validators } from '~/types'
+    import type { AuthFields, Validators } from '@/types/index'
+    import AuthPanel from '@/components/auth/AuthPanel.vue'
+    import type { ComponentExposed } from 'vue-component-type-helpers'
 
     // page meta
     definePageMeta({
@@ -131,7 +135,10 @@
         if (fieldErrors.value[id]) return
         fieldErrors.value[id] = await validators[id](fieldValues.value[id])
     }
-    const signup = async () => {
+    const authPanelRef =
+        useTemplateRef<ComponentExposed<typeof AuthPanel>>('auth-panel')
+
+    const signup = async (captchaToken: string) => {
         for (const id of Object.keys(fieldValues.value) as SignupFieldId[]) {
             fieldErrors.value[id] = await validators[id](fieldValues.value[id])
             if (fieldErrors.value[id]) return
@@ -141,6 +148,7 @@
             email: fieldValues.value['signup-email'],
             password: fieldValues.value['signup-password'],
             options: {
+                captchaToken: captchaToken,
                 emailRedirectTo: `${window.location.origin}/confirm`,
                 data: {
                     username: fieldValues.value['signup-username'],
@@ -149,20 +157,31 @@
         })
         if (error) {
             formError.value = '註冊失敗'
+            authPanelRef.value?.resetCaptcha()
         } else {
             navigateTo('/verify-email')
         }
     }
     const isSubmitting = ref(false)
-    const handleSubmit = async () => {
+    const handleSubmit = async (token: string) => {
         if (isSubmitting.value || user.value) return
         isSubmitting.value = true
         try {
-            await signup()
+            await signup(token)
         } catch {
             formError.value = '註冊失敗'
         } finally {
             isSubmitting.value = false
+        }
+    }
+
+    const handleGoogleSignup = async () => {
+        const { error } = await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: { redirectTo: `${window.location.origin}/confirm` },
+        })
+        if (error) {
+            formError.value = '註冊失敗'
         }
     }
     watch(
