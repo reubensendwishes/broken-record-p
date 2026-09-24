@@ -316,14 +316,6 @@ export type Database = {
           isSetofReturn: true
         }
       }
-      bar_bounds: {
-        Args: {
-          p_is_before: boolean
-          p_reference_bar_id: string
-          p_section_id: string
-        }
-        Returns: Record<string, unknown>
-      }
       create_bar: {
         Args: {
           p_content: string
@@ -439,10 +431,6 @@ export type Database = {
           isSetofReturn: false
         }
       }
-      find_intermediate: {
-        Args: { p1: number; p2: number; q1: number; q2: number }
-        Returns: Record<string, unknown>
-      }
       import_sections: {
         Args: {
           p_only_starred?: boolean
@@ -541,24 +529,6 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
-      }
-      renormalize_bars: { Args: { p_section_id: string }; Returns: undefined }
-      renormalize_record_tracks: {
-        Args: { p_record_id: string }
-        Returns: undefined
-      }
-      renormalize_sections: { Args: { p_track_id: string }; Returns: undefined }
-      section_bounds: {
-        Args: {
-          p_is_before: boolean
-          p_reference_section_id: string
-          p_track_id: string
-        }
-        Returns: Record<string, unknown>
-      }
-      text_array_max_length: {
-        Args: { arr: string[]; max_len: number }
-        Returns: boolean
       }
     }
     Enums: {
